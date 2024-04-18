@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+ 
+:root {
+  /* Primary Colors */
+  
+  --primary-color: #1627A7;
+  --background-color: #F1F3FF;
+  --hover-color: #F0F9FF;
+  --list-item-animation-color: #F5FFF0;
+  --edit-color: #E9EBFF;
+  --edit-bg-color: #475AE7;
+  --inner-color-new-item: #66FF63;
+  --tag-text-color: #000E78;
+  --tag-bg-color: #D6DBFF;
+  --delete-color: #484848;
+  --delete-bg-color: #E0E0E0;
+  --info-modal-bg: #BEC6FF;
+  --gray-text: #686868
+
+  /* Padding */
+  
+  --margin-image: 10px;
+
+  }
+}
+
