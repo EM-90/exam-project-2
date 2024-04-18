@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { HiMiniUserCircle } from "react-icons/hi2";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,6 +75,9 @@ function Navbar() {
               <li>
                 <a href="#" className=" text-white hover:font-bold">Contact</a>
               </li>
+              <li>
+                <a href="#" className=" text-white hover:font-bold"><HiMiniUserCircle className="h-8 w-8" /></a>
+              </li>
             </ul>
           </div>
 
@@ -87,6 +91,9 @@ function Navbar() {
             </li>
             <li>
               <a href="#" className=" text-gray-500 font-medium hover:text-skin-primary ps-5">Contact</a>
+            </li>
+            <li>
+              <a href="#" className="  text-gray-500 hover:text-skin-primary"><HiMiniUserCircle className="h-8 w-8" /></a>
             </li>
           </ul>
         </div>
