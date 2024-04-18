@@ -6,9 +6,9 @@ function Footer() {
         <div className="container flex justify-between items-center">
             <div className="soMe-container flex flex-col justify-center gap-2">
                 <div className="flex gap-2">
-                    <FaInstagram size={32}/>
-                    <FaFacebook size={32}/>
-                    <FaTiktok size={32}/>
+                    <FaInstagram className="h-8 w-8" />
+                    <FaFacebook className="h-8 w-8" />
+                    <FaTiktok className="h-8 w-8" />
                 </div>
                 <div className="contact-info">
                   <p>Holidaze.support@travel.com</p>
