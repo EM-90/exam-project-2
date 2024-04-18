@@ -5,7 +5,7 @@ import Navbar from "./navbar";
 function Layout({ children }) {
   return (
     <div className="flex flex-col min-h-screen">
-      <header>
+      <header className="sticky top-0 z-50">
         <Navbar />
       </header>
 

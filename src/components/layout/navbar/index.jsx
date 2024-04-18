@@ -9,7 +9,7 @@ function Navbar() {
   };
 
   return (
-    <div className="shadow-md">
+    <div className="shadow-md bg-white">
       <div className="container mx-auto py-4">
         <div className="flex items-center justify-between">
           <h1 className="text-skin-primary text-2xl font-bold">Holidaze</h1>
