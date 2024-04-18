@@ -20,6 +20,7 @@ export default {
       },
       backgroundColor: {
         skin: {
+          primary: 'var(--primary-color)',
           deleteBg: 'var(--delete-bg-color)',
           infoBg: 'var(--info-modal-bg)',
           editBg: 'var(--edit-bg-color)',
