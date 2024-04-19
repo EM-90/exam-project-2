@@ -11,8 +11,8 @@ function Layout() {
       </header>
 
      
-      <main className="flex-grow mx-auto ">
-        <div className="container flex justify-center items-center px-7">
+      <main >
+        <div>
          <Outlet/>
         </div>
       </main>
