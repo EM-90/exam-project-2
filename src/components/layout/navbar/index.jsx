@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { HiOutlineUserCircle } from "react-icons/hi";
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,6 +8,10 @@ function Navbar() {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const closeMenu = () => {
+    setIsOpen(false);
+  }
 
   return (
     <div className="shadow-md bg-white">
@@ -71,30 +76,34 @@ function Navbar() {
             </button>
             <ul className="flex flex-col items-center space-y-4 pt-8 pr-4">
               <li>
-                <a href="#" className="text-white hover:font-bold">Home</a>
+                <Link to="/" onClick={closeMenu} className="text-white hover:font-bold">Home</Link>
               </li>
               <li>
-                <a href="#" className="text-white hover:font-bold">About</a>
+                <Link to="/about" onClick={closeMenu} className="text-white hover:font-bold">About</Link>
               </li>
               <li>
-                <a href="#" className="text-white hover:font-bold">Contact</a>
+                <Link to="/contact" onClick={closeMenu}  className="text-white hover:font-bold">Contact</Link>
               </li>
+              <Link to="/profile">
                 <HiOutlineUserCircle className="h-8 w-8 text-white hover:font-bold" />
+              </Link>
             </ul>
           </div>
 
           {/* Your desktop menu */}
           <ul className="hidden md:flex space-x-4">
             <li>
-              <a href="#" className="text-gray-700 font-medium hover:text-skin-primary ps-5">Home</a>
+              <Link to="/" className="text-gray-700 font-medium hover:text-skin-primary ps-5">Home</Link>
             </li>
             <li>
-              <a href="#" className="text-gray-700 font-medium hover:text-skin-primary ps-5">About</a>
+              <Link  to="/about" className="text-gray-700 font-medium hover:text-skin-primary ps-5">About</Link> 
             </li>
             <li>
-              <a href="#" className="text-gray-700 font-medium hover:text-skin-primary ps-5">Contact</a>
+              <Link to="/contact" className="text-gray-700 font-medium hover:text-skin-primary ps-5">Contact</Link>
             </li>
+            <Link to="/profile">
               <HiOutlineUserCircle className="h-8 w-8 text-gray-700 hover:text-skin-primary" />
+            </Link>
           </ul>
         </div>
       </div>

@@ -1,8 +1,9 @@
 import Footer from "./footer";
 import Navbar from "./navbar";
+import { Outlet } from "react-router-dom";
 
 
-function Layout({ children }) {
+function Layout() {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="sticky top-0 z-50">
@@ -10,13 +11,15 @@ function Layout({ children }) {
       </header>
 
      
-      <main className="flex-grow">
-        {children}
+      <main className="flex-grow mx-auto ">
+        <div className="container flex justify-center items-center">
+         <Outlet/>
+        </div>
       </main>
 
      
       <footer>
-      <Footer />
+       <Footer />
       </footer>
     </div>
   );
