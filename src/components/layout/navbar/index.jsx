@@ -15,7 +15,7 @@ function Navbar() {
 
   return (
     <div className="shadow-md bg-white">
-      <div className="container mx-auto py-4">
+      <div className="container mx-auto py-4 px-7">
         <div className="flex items-center justify-between">
           <h1 className="text-skin-primary text-2xl font-bold">Holidaze</h1>
 
@@ -53,11 +53,11 @@ function Navbar() {
           </div>
 
           {/* Your mobile menu */}
-          <div className={`md:hidden fixed inset-0 bg-skin-primary z-50 overflow-hidden transition-opacity ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+          <div className={`md:hidden fixed flex   inset-0 bg-skin-primary z-50 overflow-hidden transition-opacity  ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
             <button
               onClick={toggleMenu}
               type="button"
-              className="absolute top-0 right-0 mt-4 mr-4 text-white hover:text-gray-200 focus:outline-none"
+              className="absolute top-0 right-0 mt-4 mr-4 text-white hover:text-gray-200 focus:outline-none px-7"
             >
               {/* Close icon */}
               <svg
@@ -74,23 +74,26 @@ function Navbar() {
                 />
               </svg>
             </button>
-            <ul className="flex flex-col items-center space-y-4 pt-8 pr-4">
+            <ul className="space-y-4 pt-8 pl-7">
               <li>
-                <Link to="/" onClick={closeMenu} className="text-white hover:font-bold">Home</Link>
+                <Link to="/" onClick={closeMenu} className="text-white hover:font-bold text-3xl">Home</Link>
               </li>
               <li>
-                <Link to="/about" onClick={closeMenu} className="text-white hover:font-bold">About</Link>
+                <Link to="/about" onClick={closeMenu} className="text-white hover:font-bold text-3xl">About</Link>
               </li>
               <li>
-                <Link to="/contact" onClick={closeMenu}  className="text-white hover:font-bold">Contact</Link>
+                <Link to="/contact" onClick={closeMenu}  className="text-white hover:font-bold text-3xl">Contact</Link>
               </li>
-              <Link to="/profile">
-                <HiOutlineUserCircle className="h-8 w-8 text-white hover:font-bold" />
-              </Link>
+              <li>
+                <Link to="/profile">
+                  <HiOutlineUserCircle className="h-10 w-10 text-white hover:font-bold" />
+                </Link>
+              </li>
+              
             </ul>
           </div>
 
-          {/* Your desktop menu */}
+          {/*Desktop menu */}
           <ul className="hidden md:flex space-x-4">
             <li>
               <Link to="/" className="text-gray-700 font-medium hover:text-skin-primary ps-5">Home</Link>

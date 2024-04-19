@@ -12,7 +12,7 @@ function Layout() {
 
      
       <main className="flex-grow mx-auto ">
-        <div className="container flex justify-center items-center">
+        <div className="container flex justify-center items-center px-7">
          <Outlet/>
         </div>
       </main>
