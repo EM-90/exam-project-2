@@ -8,7 +8,7 @@ import About from './pages/about';
 import Contact from './pages/contact';
 import Profile from './pages/profile';
 import Nopage from './pages/nopage';
-
+import { CrudProvider } from './context/crud';
 
 
 function App() {
@@ -16,6 +16,7 @@ function App() {
   return (
     <>
     <BrowserRouter>
+     <CrudProvider>
        <Routes>
           <Route path="/" element={<Layout/>}>
             <Route index element={<Home/>}/>
@@ -25,6 +26,7 @@ function App() {
             <Route path="*" element={<Nopage/>}/>
           </Route>
         </Routes>
+      </CrudProvider>
     </BrowserRouter>
     </>
   )
