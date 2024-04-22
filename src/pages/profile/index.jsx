@@ -1,18 +1,15 @@
-import { useState } from "react"
 
-function profile() {
+import RegisterForm from "../../components/forms/registerForm";
 
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+function Profile() {
 
-  if(!isLoggedIn) {
-    setIsLoggedIn(false);
-  }
 
   return (
     <div>
       <h1>Profile</h1>
+      <RegisterForm/>
     </div>
   )
 }
 
-export default profile
+export default Profile

@@ -32,8 +32,9 @@ export default {
         skin: {
           innerBorderNewLi: 'var(--inner-color-new-item)',
           liAnimateColor: 'var(--list-item-animation-color)',
+          InputBorder: 'var(--primary-color)'
         }
-      }
+      },
       
     },
   },
