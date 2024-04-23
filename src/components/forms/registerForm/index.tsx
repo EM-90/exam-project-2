@@ -1,16 +1,12 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import registerUser from '../../../api/registerUser';
 
-interface Avatar {
-    url: string;
-    alt: string;
-  }
 
 interface FormData {
     name: string;
     email: string;
     password: string;
-    avatar: Avatar;
+    
     
   }
 
@@ -19,16 +15,11 @@ function RegisterForm() {
     name: '',
     email: '',
     password: '',
-    avatar: { url: '', alt: '' },
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (name === 'avatar') {
-        setFormData({ ...formData, avatar: { ...formData.avatar, url: value } }); 
-    } else {
-        setFormData({ ...formData, [name]: value });
-    }
+    setFormData({ ...formData, [name]: value });
 };
 
 
@@ -93,17 +84,6 @@ function RegisterForm() {
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
             required
             autoComplete="current-password"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="avatar" className="block mb-2">Avatar</label>
-          <input
-            type="text"
-            id="avatar"
-            name="avatar"
-            value={formData.avatar.url}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
           />
         </div>
         <button
