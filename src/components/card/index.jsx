@@ -5,7 +5,9 @@ function Card({ item }) {
   return (
     <div className="card cursor-pointer">
       <div className="imageContainer h-60">
-        <img className="object-cover w-full h-full rounded-md  " src={item.media[0].url} alt={item.name} />
+      {item.media && item.media.length > 0 && (
+          <img className="object-cover w-full h-full rounded-md" src={item.media[0].url} alt={item.name} />
+        )}
       </div>
       <div className="textContentContainer flex flex-col gap-1 py-2">
         <div className="titleAndRating flex item-center justify-between">

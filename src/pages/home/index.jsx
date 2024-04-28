@@ -1,24 +1,25 @@
-import React, { useEffect } from 'react';
-import { useCrud } from '../../context/crud';
+import React, { useEffect, useState } from 'react';
 import Card from '../../components/card';
+import fetchData from '../../api/crud/read';
+
 
 
 function Home() {
-  const { data, loading, error, fetchData } = useCrud();
+  const [data, setData] = useState([]);
+
 
   useEffect(() => {
-    fetchData("/venues");
+    const loadData = async () => {
+      try {
+        const result = await fetchData("/holidaze/venues"); 
+        setData(result); 
+      } catch (error) {
+        console.error('Failed to fetch data:', error); 
+      }
+    };
+
+    loadData(); 
   }, []);
-  console.log(data);
-
-  
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
 
 
 

@@ -1,38 +1,82 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-import registerUser from '../../../api/registerUser';
+import create from '../../../api/crud/create';
+import validationMessage from '../../../utils/formUtils';
 
-
-interface FormData {
-    name: string;
-    email: string;
-    password: string;
-    
-    
-  }
+function validateEmail(email: string): boolean {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/;
+  return emailRegex.test(email);
+}
 
 function RegisterForm() {
-  const [formData, setFormData] = useState<FormData>({
+  const [errors, setErrors] = useState<{ [key: string]: string }>({
     name: '',
     email: '',
-    password: '',
+    password: ''
   });
+  const [data, setFormData] = useState({
+    name: '',
+    email: '',
+    password: ''
+  });
+
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-};
+    setFormData({ ...data, [name]: value });
+    setErrors({ ...errors, [name]: '' });
+  };
 
+  const handleBlur = (e: ChangeEvent<HTMLInputElement>, message: string) => {
+    const { name, value } = e.target;
+    let newErrors: { [key: string]: string } = {};
 
-  const handleFormSubmit =  async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try{
-        const response = await registerUser(formData);
-        console.log('Registration success', response);
-    }catch(error) {
-        console.log('Registration failed',)
+    switch (name) {
+      case 'name':
+        newErrors.name = value.length < 3 ? message : '';
+        break;
+      case 'email':
+        newErrors.email = !validateEmail(value) ? message : '';
+        break;
+      case 'password':
+        newErrors.password = value.length < 8 ? message : '';
+        break;
+      default:
+        break;
     }
-    
 
+    setErrors({ ...errors, ...newErrors });
+  };
+
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    let newErrors: { [key: string]: string } = {};
+
+    if (data.name.length < 3) {
+      newErrors.name = '';
+    }
+
+    if (!validateEmail(data.email)) {
+      newErrors.email = '';
+    }
+
+    if (data.password.length < 8) {
+      newErrors.password = '';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    try {
+      const response = await create("/auth/register", data);
+      setSuccessMessage(validationMessage(response.errors, "Registration successful"));
+      return response;
+    } catch (error) {
+      console.log('Registration failed', error);
+    }
   };
 
   return (
@@ -55,11 +99,13 @@ function RegisterForm() {
             type="text"
             id="name"
             name="name"
-            value={formData.name}
+            value={data.name}
             onChange={handleChange}
+            onBlur={(e) => handleBlur(e, 'Username must be at least 3 characters long')}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
             required
           />
+          {errors.name && <div style={{ color: 'red' }}>{errors.name}</div>}
         </div>
         <div className="mb-4">
           <label htmlFor="email" className="block mb-2">Email</label>
@@ -67,11 +113,13 @@ function RegisterForm() {
             type="email"
             id="email"
             name="email"
-            value={formData.email}
+            value={data.email}
             onChange={handleChange}
+            onBlur={(e) => handleBlur(e, 'e-mail must end with stud.noroff.no')}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
             required
           />
+          {errors.email && <div style={{ color: 'red' }}>{errors.email}</div>}
         </div>
         <div className="mb-4">
           <label htmlFor="password" className="block mb-2">Password</label>
@@ -79,15 +127,20 @@ function RegisterForm() {
             type="password"
             id="password"
             name="password"
-            value={formData.password}
+            value={data.password}
             onChange={handleChange}
+            onBlur={(e) => handleBlur(e, 'Username must be at least 3 characters long')}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
             required
             autoComplete="current-password"
           />
+          {errors.password && <div style={{ color: 'red' }}>{errors.password}</div>}
+        </div>
+        {successMessage && <div style={{ color: 'green' }}>{successMessage}</div>}
+        <div>
         </div>
         <button
-          type="submit" 
+          type="submit"
           className="w-full py-2 bg-skin-createBg text-skin-primary hover:text-white rounded-md hover:bg-skin-primary border-skin-primary"
         >
           Register
