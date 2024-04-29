@@ -7,7 +7,7 @@ function validateEmail(email: string): boolean {
   return emailRegex.test(email);
 }
 
-function RegisterForm() {
+function RegisterForm({onLoginClick}) {
   const [errors, setErrors] = useState<{ [key: string]: string }>({
     name: '',
     email: '',
@@ -145,6 +145,7 @@ function RegisterForm() {
         >
           Register
         </button>
+        <button onClick={onLoginClick}>Have an account? Log in here</button>
       </form>
     </div>
   );

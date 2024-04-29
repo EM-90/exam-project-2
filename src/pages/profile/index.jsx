@@ -1,14 +1,23 @@
-
 import RegisterForm from "../../components/forms/registerForm";
+import LoginForm from "../../components/forms/loginForm";
+import { useState } from "react";
+
 
 function Profile() {
 
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
+
+  const toggleForm = () => setShowRegisterForm(prev => !prev)
+
 
   return (
-    <div>
-      <h1>Profile</h1>
-      <RegisterForm/>
-    </div>
+    <main>
+      {showRegisterForm ? (
+        <RegisterForm onLoginClick={toggleForm} />
+      ) : (
+        <LoginForm onRegisterClick={toggleForm} />
+      )}
+    </main>
   )
 }
 
