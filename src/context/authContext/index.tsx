@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import create from "../../api/crud/create";
+import apiClient from "../../api/apiClient";
 
 type User = {
     email: string;
@@ -24,6 +25,7 @@ export function useAuth() {
 
 export function AuthProvider({children}) {
     const [user, setUser] = useState<User | null>(null);
+    let accessToken = '';
 
     const login = async (email: string, password: string) => {
       try {
@@ -40,7 +42,12 @@ export function AuthProvider({children}) {
         });
 
     
-        localStorage.setItem('token', response.accessToken);
+        accessToken = response.accessToken;
+        localStorage.setItem('token', accessToken);
+        //apiClient.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+
+        
+        
 
 
       } catch (error) {
@@ -53,6 +60,7 @@ export function AuthProvider({children}) {
         
         setUser(null);
         localStorage.removeItem('token');
+        // delete apiClient.defaults.headers.common['Authorization'];
       
         
       };
