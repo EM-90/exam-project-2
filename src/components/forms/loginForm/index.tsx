@@ -1,10 +1,22 @@
 import React from 'react'
+import { useAuth } from '../../../context/authContext';
 
 function LoginForm({onRegisterClick}) {
+
+    const { login } = useAuth();
+
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        console.log("Email:", email, "Password:", password);
+        await login(email, password);
+      };
+
     return (
     <div className='container mx-auto my-7 px-7 min-h-screen flex flex-col justify-center items-center '>
       <h2 className="text-5xl font-light mb-10">Login</h2>
-      <form className='mb-40 w-1/2'>
+      <form className='mb-40 w-1/2' onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="email" className="block mb-2">Email</label>
           <input
