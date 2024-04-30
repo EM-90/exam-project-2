@@ -44,7 +44,7 @@ export function AuthProvider({children}) {
     
         accessToken = response.accessToken;
         localStorage.setItem('token', accessToken);
-        //apiClient.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+        apiClient.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
         
         
@@ -60,7 +60,7 @@ export function AuthProvider({children}) {
         
         setUser(null);
         localStorage.removeItem('token');
-        // delete apiClient.defaults.headers.common['Authorization'];
+        delete apiClient.defaults.headers.common['Authorization'];
       
         
       };
