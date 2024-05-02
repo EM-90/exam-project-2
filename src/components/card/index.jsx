@@ -11,7 +11,7 @@ function Card({ item }) {
       </div>
       <div className="textContentContainer flex flex-col gap-1 py-2">
         <div className="titleAndRating flex item-center justify-between">
-          <h4 className=" text-xl font-semibold">{item.name}</h4>
+          <h4 className="text-xl font-semibold overflow-hidden whitespace-nowrap overflow-ellipsis w-64">{item.name}</h4>
           <div className="flex items-center">
             <HiOutlineStar />
             <p className="pl-1 font-medium">{item.rating}/5</p>
