@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import React from 'react'
 import fetchData from "../../api/crud/read";
+import DatePicker from "../calendar";
 
 interface VenueMeta {
   wifi: boolean;
@@ -64,7 +65,7 @@ function VenueDetails() {
             <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                 {venueData.media && venueData.media.length > 0 && (
-                <img src={venueData.media[0].url} alt={venueData.media[0].alt || 'Venue image'} className=" object-cover  w-full rounded-lg shadow-md mb-4"/>
+                <img src={venueData.media[0].url} alt={venueData.media[0].alt || 'Venue image'} className=" object-cover max-h-96  w-full rounded-lg shadow-md mb-4"/>
             )}
                     <div className="mt-4">
                         <h1 className="text-2xl font-bold">{venueData.name}</h1>
@@ -81,7 +82,7 @@ function VenueDetails() {
                     </div>
                 </div>
                 <div>
-                  
+                  <DatePicker/>
                 </div>
             </section>
         </article>

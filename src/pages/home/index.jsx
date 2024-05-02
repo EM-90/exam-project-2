@@ -3,8 +3,6 @@ import Card from '../../components/card';
 import fetchData from '../../api/crud/read';
 import { useNavigate } from 'react-router-dom';
 
-
-
 function Home() {
   const [data, setData] = useState([]);
   
