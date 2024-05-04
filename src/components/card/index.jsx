@@ -1,9 +1,9 @@
 import { HiOutlineStar } from "react-icons/hi";
 
+function Card({ item, onClick }) {
 
-function Card({ item }) {
   return (
-    <div className="card cursor-pointer">
+    <div className="card cursor-pointer" onClick={onClick}>
       <div className="imageContainer h-60">
       {item.media && item.media.length > 0 && (
           <img className="object-cover w-full h-full rounded-md" src={item.media[0].url} alt={item.name} />

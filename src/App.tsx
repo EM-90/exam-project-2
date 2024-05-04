@@ -8,6 +8,7 @@ import About from './pages/about';
 import Contact from './pages/contact';
 import Profile from './pages/profile';
 import Nopage from './pages/nopage';
+import VenueDetails from './components/venueDetails';
 
 
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="/about" element={<About/>}/>
             <Route path="/contact" element={<Contact/>}/>
             <Route path="/profile" element={<Profile/>}/>
+            <Route path="/venue/:venueId" element={<VenueDetails/>}/>
             <Route path="*" element={<Nopage/>}/>
           </Route>
         </Routes>
