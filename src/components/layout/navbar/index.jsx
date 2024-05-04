@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../../context/authContext';
 
 function Navbar() {
+  const { user, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -84,6 +86,11 @@ function Navbar() {
               <li>
                 <Link to="/contact" onClick={closeMenu}  className="text-white hover:font-bold text-3xl">Contact</Link>
               </li>
+              {user && (
+                <li>
+                  <button onClick={logout} className="text-white hover:font-bold text-3xl">Logout</button>
+                </li>
+              )}
               <li>
                 <Link to="/profile">
                   <HiOutlineUserCircle className="h-10 w-10 text-white hover:font-bold" />
@@ -104,6 +111,11 @@ function Navbar() {
             <li>
               <Link to="/contact" className="text-gray-700 font-medium hover:text-skin-primary ps-5">Contact</Link>
             </li>
+            {user && (
+              <li>
+                <button onClick={logout} className="text-gray-700 font-medium hover:text-skin-primary ps-5">Logout</button>
+              </li>
+            )}
             <Link to="/profile">
               <HiOutlineUserCircle className="h-8 w-8 text-gray-700 hover:text-skin-primary" />
             </Link>

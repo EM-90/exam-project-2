@@ -1,74 +1,79 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import create from "../../api/crud/create";
 import apiClient from "../../api/apiClient";
 
 type User = {
-    email: string;
-    token: string;
-  }
-  
-  type AuthContextType = {
-    user: User | null;
-    login: (email: string, password: string) => Promise<void>;
-    logout: () => void;
-  };
+  email: string;
+  token: string;
+};
 
-  const AuthContext = createContext<AuthContextType>({
-    user: null,
-    login: async () => { console.warn("Login function not implemented."); },
-    logout: () => { console.warn("Logout function not implemented."); }
-  });  
+type AuthContextType = {
+  user: User | null;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => void;
+};
+
+const AuthContext = createContext<AuthContextType>({
+  user: null,
+  login: async () => {
+    console.warn("Login function not implemented.");
+  },
+  logout: () => {
+    console.warn("Logout function not implemented.");
+  },
+});
 
 export function useAuth() {
-    return useContext(AuthContext);
+  return useContext(AuthContext);
 }
 
-export function AuthProvider({children}) {
-    const [user, setUser] = useState<User | null>(null);
-    let accessToken = '';
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState<User | null>(null);
 
-    const login = async (email: string, password: string) => {
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
       try {
-
-        const response = await create("/auth/login", {email, password })
-
-        if(!response){
-            throw new Error("Login failed");
-        }
-            
-        setUser({
-        email: response.email,  
-        token: response.token
-        });
-
-    
-        accessToken = response.accessToken;
-        localStorage.setItem('token', accessToken);
-        apiClient.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-
-        
-        
-
-
+        apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        setUser({ email: '', token });
       } catch (error) {
         console.error('Login error:', error);
-        throw error;
       }
     }
+  }, []);
 
-    const logout = () => {
-        
-        setUser(null);
-        localStorage.removeItem('token');
-        delete apiClient.defaults.headers.common['Authorization'];
-      
-        
-      };
+  const login = async (email: string, password: string) => {
+    try {
+      const response = await create("/auth/login", { email, password });
 
-      return (
-        <AuthContext.Provider value={{ user, login, logout }}>
-          {children}
-        </AuthContext.Provider>
-      );
-      
+      if (!response) {
+        throw new Error("Login failed");
+      }
+
+      const { email: userEmail, token: accessToken } = response;
+
+      setUser({
+        email: userEmail,
+        token: accessToken
+      });
+
+      localStorage.setItem('token', accessToken);
+      apiClient.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+    } catch (error) {
+      console.error('Login error:', error);
+      throw error;
+    }
+  };
+
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('token');
+    delete apiClient.defaults.headers.common['Authorization'];
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }

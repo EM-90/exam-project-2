@@ -1,24 +1,33 @@
-import RegisterForm from "../../components/forms/registerForm";
+import React, { useState } from "react";
 import LoginForm from "../../components/forms/loginForm";
-import { useState } from "react";
+import RegisterForm from "../../components/forms/registerForm";
+import { useAuth } from '../../context/authContext';
+import UserInfo from "../../components/profileContent/userInfo";
 
 
 function Profile() {
-
+  const { user } = useAuth();
   const [showRegisterForm, setShowRegisterForm] = useState(false);
+  const toggleForm = () => setShowRegisterForm(prev => !prev);
 
-  const toggleForm = () => setShowRegisterForm(prev => !prev)
-
-
-  return (
-    <main>
-      {showRegisterForm ? (
-        <RegisterForm onLoginClick={toggleForm} />
-      ) : (
-        <LoginForm onRegisterClick={toggleForm} />
-      )}
-    </main>
-  )
+  if (user) {
+    return (
+      <main>
+        <UserInfo/>
+      </main>
+    );
+  } else {
+    return (
+      <main>
+        {showRegisterForm ? (
+          <RegisterForm onLoginClick={toggleForm} />
+        ) : (
+          <LoginForm onRegisterClick={toggleForm} />
+        )}
+      </main>
+    );
+  }
 }
 
-export default Profile
+export default Profile;
+
