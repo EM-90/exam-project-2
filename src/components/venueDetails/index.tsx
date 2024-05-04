@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import React from 'react'
 import fetchData from "../../api/crud/read";
 import DatePicker from "../calendar";
+import { FaCat, FaWifi, FaEgg, FaSquareParking } from "react-icons/fa6";
 
 
 
@@ -86,14 +87,27 @@ function VenueDetails() {
                           <li><strong>Maximum Guests:</strong> {venueData.maxGuests}</li>
                           <li><strong>Rating:</strong> {venueData.rating}/5</li>
                           <li><strong>Address:</strong> {`${venueData.location.address}, ${venueData.location.city}, ${venueData.location.zip}, ${venueData.location.country}`}</li>
-                          <li><strong>Facilities:</strong> Wifi ({venueData.meta.wifi ? "Yes" : "No"}), Parking ({venueData.meta.parking ? "Yes" : "No"}), Breakfast included ({venueData.meta.breakfast ? "Yes" : "No"}), Pets allowed ({venueData.meta.pets ? "Yes" : "No"})</li>
                       </ul>
+                      <section className="mt-7">
+                          <h3 className=" font-bold text-xl">This place can offer</h3>
+                        <ul className="w-full mt-4 flex gap-7 flex-wrap">
+                          <div className=" flex flex-col gap-7">
+                            <li className=" flex gap-2 items-center"><FaWifi size={32} className=" text-skin-primary"/><strong>Wifi</strong> ({venueData.meta.wifi ? "Yes" : "No"})</li>
+                            <li className=" flex gap-2  items-center"><FaSquareParking size={32} className=" text-skin-primary"/><strong>Parking</strong> ({venueData.meta.parking ? "Yes" : "No"})</li>
+                          </div>
+                          <div className=" flex flex-col gap-7">
+                            <li className=" flex gap-2  items-center"><FaEgg size={32} className=" text-skin-primary"/><strong>Breakfast included</strong> ({venueData.meta.breakfast ? "Yes" : "No"})</li>
+                            <li className=" flex gap-2  items-center"><FaCat size={32} className=" text-skin-primary"/><strong>Pets allowed</strong> ({venueData.meta.pets ? "Yes" : "No"})</li>
+                          </div>
+                        </ul>
+                      </section>
                     </section>
                     
                 </div>
-                <div>
-                  <h3>Select your booking period</h3>
-                  <DatePicker/>
+                <div className="w-full">
+                   <h3>Select your booking period</h3>
+                    <DatePicker/>
+                    <button className=" w-1/3 py-2 bg-skin-createBg text-skin-primary hover:bg-skin-primary hover:text-white rounded-md hover:bg-skin-primay border-skin-primary"> book this venue period</button>
                 </div>
             </section>
         </article>
