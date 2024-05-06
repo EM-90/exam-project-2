@@ -2,9 +2,23 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import create from "../../api/crud/create";
 import apiClient from "../../api/apiClient";
 
+
+type Avatar = {
+  url: string;
+  alt: string;
+};
+
+type Banner = {
+  url: string;
+  alt: string;
+};
+
 type User = {
   email: string;
   token: string;
+  name: string;
+  avatar: Avatar;
+  banner: Banner;
 };
 
 type AuthContextType = {
@@ -31,13 +45,14 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
+    const userData = localStorage.getItem('userData');
+    if (userData) {
       try {
-        apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        setUser({ email: '', token });
+        const storedUser = JSON.parse(userData);
+        apiClient.defaults.headers.common['Authorization'] = `Bearer ${storedUser.token}`;
+        setUser(storedUser);
       } catch (error) {
-        console.error('Login error:', error);
+        console.error('Error setting authorization and restoring user data:', error);
       }
     }
   }, []);
@@ -45,20 +60,18 @@ export function AuthProvider({ children }) {
   const login = async (email: string, password: string) => {
     try {
       const response = await create("/auth/login", { email, password });
-
-      if (!response) {
-        throw new Error("Login failed");
+      if (!response || !response.accessToken) {
+        throw new Error("Login failed or no access token received");
       }
 
-      const { email: userEmail, token: accessToken } = response;
+      const { email: userEmail, accessToken, name, avatar, banner } = response;
 
-      setUser({
-        email: userEmail,
-        token: accessToken
-      });
+      const newUser = { email: userEmail, token: accessToken, name, avatar: {url: avatar.url, alt: avatar?.alt }, banner: { url: banner.url, alt: banner?.alt } };
 
-      localStorage.setItem('token', accessToken);
+      localStorage.setItem('userData', JSON.stringify(newUser));
       apiClient.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+
+      setUser(newUser);
     } catch (error) {
       console.error('Login error:', error);
       throw error;
@@ -67,7 +80,7 @@ export function AuthProvider({ children }) {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('token');
+    localStorage.removeItem('userData');
     delete apiClient.defaults.headers.common['Authorization'];
   };
 
