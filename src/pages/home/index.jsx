@@ -1,30 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import Card from '../../components/card';
-import fetchData from '../../api/crud/read';
+import { venueAPI } from '../../api/venue';
 import { useNavigate } from 'react-router-dom';
 
 function Home() {
   const [data, setData] = useState([]);
-  
   let navigate = useNavigate();
 
   const handleClick = (id) => {
     navigate(`/venue/${id}`);
-  }
-
+  };
 
   useEffect(() => {
-    const loadData = async () => {
+    const fetchData = async () => {
       try {
-        const result = await fetchData("/holidaze/venues"); 
-        setData(result); 
+        const response = await venueAPI.fetchAllVenues();
+        setData(response.data.data);
+        
       } catch (error) {
-        console.error('Failed to fetch data:', error); 
+        console.error('Failed to fetch data:', error);
       }
     };
 
-    loadData(); 
+    fetchData();
+    ;
   }, []);
+
+  console.log(data);
 
 
 

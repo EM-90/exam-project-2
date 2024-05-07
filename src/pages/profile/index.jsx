@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LoginForm from "../../components/forms/loginForm";
 import RegisterForm from "../../components/forms/registerForm";
 import { useAuth } from '../../context/authContext';
-import UserInfo from "../../components/profileContent/userInfo";
+import ProfileHeader from "../../components/profileContent/profileHeader";
 
 
 function Profile() {
@@ -13,7 +13,7 @@ function Profile() {
   if (user) {
     return (
       <main>
-        <UserInfo/>
+        <ProfileHeader/>
       </main>
     );
   } else {

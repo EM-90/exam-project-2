@@ -1,13 +1,9 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-import create from '../../../api/crud/create';
-import validationMessage from '../../../utils/formUtils';
+import { useAuth } from '../../../context/authContext'; 
+import validateEmail from '../../../utils/validataEmail';
 
-function validateEmail(email: string): boolean {
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@stud\.noroff\.no$/;
-  return emailRegex.test(email);
-}
-
-function RegisterForm({onLoginClick}) {
+function RegisterForm({ onLoginClick }) {
+  const { register } = useAuth();  // Using register from context
   const [errors, setErrors] = useState<{ [key: string]: string }>({
     name: '',
     email: '',
@@ -18,7 +14,6 @@ function RegisterForm({onLoginClick}) {
     email: '',
     password: ''
   });
-
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -27,22 +22,16 @@ function RegisterForm({onLoginClick}) {
     setErrors({ ...errors, [name]: '' });
   };
 
-  const handleBlur = (e: ChangeEvent<HTMLInputElement>, message: string) => {
+  const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    let newErrors: { [key: string]: string } = {};
-
-    switch (name) {
-      case 'name':
-        newErrors.name = value.length < 3 ? message : '';
-        break;
-      case 'email':
-        newErrors.email = !validateEmail(value) ? message : '';
-        break;
-      case 'password':
-        newErrors.password = value.length < 8 ? message : '';
-        break;
-      default:
-        break;
+    const newErrors: { [key: string]: string } = {};
+    
+    if (name === 'name' && value.length < 3) {
+      newErrors.name = 'Username must be at least 3 characters long';
+    } else if (name === 'email' && !validateEmail(value)) {
+      newErrors.email = 'Email must end with stud.noroff.no';
+    } else if (name === 'password' && value.length < 8) {
+      newErrors.password = 'Password must be at least 8 characters long';
     }
 
     setErrors({ ...errors, ...newErrors });
@@ -50,32 +39,13 @@ function RegisterForm({onLoginClick}) {
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    let newErrors: { [key: string]: string } = {};
-
-    if (data.name.length < 3) {
-      newErrors.name = '';
-    }
-
-    if (!validateEmail(data.email)) {
-      newErrors.email = '';
-    }
-
-    if (data.password.length < 8) {
-      newErrors.password = '';
-    }
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-
-    try {
-      const response = await create("/auth/register", data);
-      setSuccessMessage(validationMessage(response.errors, "Registration successful"));
-      return response;
-    } catch (error) {
-      console.log('Registration failed', error);
+    if (!errors.name && !errors.email && !errors.password) {
+      try {
+        await register(data.name, data.email, data.password);
+        setSuccessMessage("Registration successful. You can now log in.");
+      } catch (error) {
+        console.error('Registration failed:', error);
+      }
     }
   };
 
@@ -101,7 +71,7 @@ function RegisterForm({onLoginClick}) {
             name="name"
             value={data.name}
             onChange={handleChange}
-            onBlur={(e) => handleBlur(e, 'Username must be at least 3 characters long')}
+            onBlur={(e) => handleBlur(e)}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
             required
           />
@@ -115,7 +85,7 @@ function RegisterForm({onLoginClick}) {
             name="email"
             value={data.email}
             onChange={handleChange}
-            onBlur={(e) => handleBlur(e, 'e-mail must end with stud.noroff.no')}
+            onBlur={(e) => handleBlur(e)}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
             required
           />
@@ -129,7 +99,7 @@ function RegisterForm({onLoginClick}) {
             name="password"
             value={data.password}
             onChange={handleChange}
-            onBlur={(e) => handleBlur(e, 'Username must be at least 3 characters long')}
+            onBlur={(e) => handleBlur(e)}
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
             required
             autoComplete="current-password"

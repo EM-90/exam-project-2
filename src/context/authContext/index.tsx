@@ -1,92 +1,64 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import create from "../../api/crud/create";
-import apiClient from "../../api/apiClient";
+import React, { createContext, useContext, useState, useEffect, ReactNode, FunctionComponent} from 'react';
+import { User } from "../../types";
+import { authAPI } from "../../api/auth";
 
-
-type Avatar = {
-  url: string;
-  alt: string;
-};
-
-type Banner = {
-  url: string;
-  alt: string;
-};
-
-type User = {
-  email: string;
-  token: string;
-  name: string;
-  avatar: Avatar;
-  banner: Banner;
-};
-
-type AuthContextType = {
-  user: User | null;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
-};
-
-const AuthContext = createContext<AuthContextType>({
-  user: null,
-  login: async () => {
-    console.warn("Login function not implemented.");
-  },
-  logout: () => {
-    console.warn("Logout function not implemented.");
-  },
-});
-
-export function useAuth() {
-  return useContext(AuthContext);
+interface AuthContextType {
+    user: User | null;
+    login: (email: string, password: string) => Promise<void>;
+    logout: () => void;
+    register: (name: string, email: string, password: string) => Promise<void>;
 }
 
-export function AuthProvider({ children }) {
-  const [user, setUser] = useState<User | null>(null);
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-  useEffect(() => {
-    const userData = localStorage.getItem('userData');
-    if (userData) {
-      try {
-        const storedUser = JSON.parse(userData);
-        apiClient.defaults.headers.common['Authorization'] = `Bearer ${storedUser.token}`;
-        setUser(storedUser);
-      } catch (error) {
-        console.error('Error setting authorization and restoring user data:', error);
-      }
+export const useAuth = () => {
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error('useAuth must be used within an AuthProvider');
     }
-  }, []);
+    return context;
+};
 
-  const login = async (email: string, password: string) => {
-    try {
-      const response = await create("/auth/login", { email, password });
-      if (!response || !response.accessToken) {
-        throw new Error("Login failed or no access token received");
-      }
+export const AuthProvider: FunctionComponent<{ children: ReactNode }> = ({ children }) => {
+    const [user, setUser] = useState<User | null>(null);
 
-      const { email: userEmail, accessToken, name, avatar, banner } = response;
+    useEffect(() => {
+        const storedUser = localStorage.getItem('userData');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
 
-      const newUser = { email: userEmail, token: accessToken, name, avatar: {url: avatar.url, alt: avatar?.alt }, banner: { url: banner.url, alt: banner?.alt } };
+    const login = async (email: string, password: string) => {
+        try {
+            const newUser = await authAPI.login({ email, password });
+            localStorage.setItem('userData', JSON.stringify(newUser));
+            setUser(newUser);
+        } catch (error) {
+            console.error('Login failed:', error);
+        }
+    };
 
-      localStorage.setItem('userData', JSON.stringify(newUser));
-      apiClient.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+    const logout = () => {
+        localStorage.removeItem('userData');
+        setUser(null);
+    };
 
-      setUser(newUser);
-    } catch (error) {
-      console.error('Login error:', error);
-      throw error;
-    }
-  };
+    const register = async (name: string, email: string, password: string) => {
+        try {
+            const newUser = await authAPI.register({ name, email, password });
+            localStorage.setItem('userData', JSON.stringify(newUser));
+            setUser(newUser);
+        } catch (error) {
+            console.error('Registration failed:', error);
+        }
+    };
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('userData');
-    delete apiClient.defaults.headers.common['Authorization'];
-  };
+    return (
+        <AuthContext.Provider value={{ user, login, logout, register }}>
+            {children}
+        </AuthContext.Provider>
+    );
+};
 
-  return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
-}
+

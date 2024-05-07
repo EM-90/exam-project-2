@@ -1,52 +1,15 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import React from 'react'
-import fetchData from "../../api/crud/read";
+import React, { useEffect, useState } from "react";
 import DatePicker from "../calendar";
 import { FaCat, FaWifi, FaEgg, FaSquareParking } from "react-icons/fa6";
+import { venueAPI } from "../../api/venue";
+import { Venue } from "../../types";
 
-
-
-interface VenueMeta {
-  wifi: boolean;
-  parking: boolean;
-  breakfast: boolean;
-  pets: boolean;
-}
-
-interface VenueLocation {
-  address: string;
-  city: string;
-  zip: string;
-  country: string;
-  continent: string;
-  lat: number;
-  lng: number;
-}
-
-interface VenueMedia {
-  url: string;
-  alt?: string;
-}
-
-interface VenueData {
-  id: string;
-  name: string;
-  description: string;
-  media: VenueMedia[];
-  price: number;
-  maxGuests: number;
-  rating: number;
-  created: string;
-  updated: string;
-  meta: VenueMeta;
-  location: VenueLocation;
-}
 
 function VenueDetails() {
 
-    const { venueId } = useParams<string>();
-    const [venueData, setVenueData] = useState<VenueData | null>(null) 
+    const { venueId } = useParams<{ venueId: string }>();
+    const [venueData, setVenueData] = useState<Venue | null>(null) 
     let navigate = useNavigate();
 
     const handleClick = (id) => {
@@ -55,12 +18,17 @@ function VenueDetails() {
 
     useEffect(() => {
         const fetchVenueData = async () => {
-          try {
-            const result = await fetchData(`/holidaze/venues/${venueId}`); 
-            setVenueData(result); 
-          } catch (error) {
-            console.error('Failed to fetch data:', error); 
+
+          if(venueId) {
+            try {
+              const response = await venueAPI.fetchVenueById(venueId); 
+              setVenueData(response.data.data); 
+            } catch (error) {
+              console.error('Failed to fetch data:', error); 
+            }
           }
+
+         
         };
     
         fetchVenueData(); 
