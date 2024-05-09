@@ -61,8 +61,7 @@ export interface Venue {
   };
   
   export type User = {
-    data: {
-      accessToken: string;
+    accessToken: string;
     name: string;
     email: string;
     bio?: string;  
@@ -74,7 +73,7 @@ export interface Venue {
         url: string;
         alt?: string;
     };  
-  }
+  
     
 };
 
