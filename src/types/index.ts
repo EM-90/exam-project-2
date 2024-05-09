@@ -61,6 +61,7 @@ export interface Venue {
   };
   
   export type User = {
+    id: string;
     accessToken: string;
     name: string;
     email: string;
