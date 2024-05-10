@@ -3,26 +3,28 @@ import React, { useEffect, useState } from "react";
 import DatePicker from "../calendar";
 import { FaCat, FaWifi, FaEgg, FaSquareParking } from "react-icons/fa6";
 import { venueAPI } from "../../api/venue";
-import { Venue } from "../../types";
+import { Venue, } from "../../types";
+import ProfileBadge from "../profileContent/profileHeader/profileBadge";
 
 
 function VenueDetails() {
 
     const { venueId } = useParams<{ venueId: string }>();
     const [venueData, setVenueData] = useState<Venue | null>(null) 
-    let navigate = useNavigate();
+   // let navigate = useNavigate();
 
-    const handleClick = (id) => {
-      navigate(`/venue/${id}`);
-    }
+    //const handleClick = (id) => {
+    //  navigate(`/venue/${id}`);
+    //}
 
     useEffect(() => {
         const fetchVenueData = async () => {
 
           if(venueId) {
             try {
-              const response = await venueAPI.fetchVenueById(venueId); 
-              setVenueData(response.data.data); 
+              const response = await venueAPI.fetchVenueById(venueId, true, true); 
+              setVenueData(response.data.data);
+              console.log(response);
             } catch (error) {
               console.error('Failed to fetch data:', error); 
             }
@@ -68,6 +70,7 @@ function VenueDetails() {
                             <li className=" flex gap-2  items-center"><FaCat size={32} className=" text-skin-primary"/><strong>Pets allowed</strong> ({venueData.meta.pets ? "Yes" : "No"})</li>
                           </div>
                         </ul>
+                        <ProfileBadge name={venueData.name}/>
                       </section>
                     </section>
                     

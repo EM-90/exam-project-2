@@ -23,7 +23,19 @@ export interface Venue {
         parking: boolean;
         breakfast: boolean;
         pets: boolean;
-    }  
+    }
+    _owner: {
+      avatar: {
+        url: string;
+        alt:string;
+      }
+      banner: {
+        url: string;
+        alt:string;
+      }
+      bio: string;
+      name:string;
+    }
   }
   
   export interface Booking {
@@ -67,10 +79,10 @@ export interface Venue {
   };
   
   export type User = {
-    id: string;
-    accessToken: string;
+    id?: string;
+    accessToken?: string;
     name: string;
-    email: string;
+    email?: string;
     bio?: string;  
     avatar: {
         url: string;
