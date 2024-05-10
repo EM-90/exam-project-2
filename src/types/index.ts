@@ -39,8 +39,14 @@ export interface Venue {
     name: string;
     email: string;
     bio?: string;
-    avatarUrl?: string;
-    bannerUrl?: string;
+    avatar: {
+      url: string;
+      alt?: string;
+  };
+  banner: {
+    url: string;
+    alt?: string;
+}; 
     venueManager: boolean;
   }
   
