@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../../context/authContext';
 import ProfileBadge from './profileBadge';
-import EditButton from "../../buttons/editButton";
+import PrimaryButton from '../../buttons/primaryButton'; 
 import Modal from "../../modal";
 import { FaCamera, FaCircleCheck } from "react-icons/fa6";
 import { profileAPI } from '../../../api/profiles';
@@ -63,14 +63,14 @@ function ProfileHeader() {
   return (
     <div className='container mx-auto my-7 px-7'> 
       <article className="profile-header relative">
-        <img className='w-full h-60 object-cover rounded-md absolute' src={user.banner.url} alt={user.banner.alt} />
+        <img className='w-full h-60 object-cover rounded-md' src={user.banner.url} alt={user.banner.alt} />
         <div className='absolute avatarSection flex flex-wrap items-center top-6 left-6'>
           <ProfileBadge name={user.name} email={user.email} avatarUrl={user.avatar.url}/>
         </div>
         
-        <EditButton onClick={handleButtonClick} className="relative top-4 left-4" disabled={false}>
-          <FaCamera size={20} />
-        </EditButton>
+        <PrimaryButton onClick={handleButtonClick} className=" px-2.5 py-2.5 bg-skin-editBg absolute top-4 left-4" disabled={false}>
+          <FaCamera className='text-white' size={20} />
+        </PrimaryButton>
         <Modal isOpen={isModalOpen} onClose={handleButtonClick}>
           <article className="flex flex-col">
             <h4 className="text-lg font-bold text-skin-primary">Edit avatar/banner</h4>
@@ -96,9 +96,9 @@ function ProfileHeader() {
                 onChange={handleBannerChange}
               />
             </div>
-            <EditButton onClick={handleUpdate} className="pl-5 flex flex-row-reverse items-center justify-between top-4 left-4" disabled={false} text="Update">
+            <PrimaryButton onClick={handleUpdate} className="pl-5 flex flex-row-reverse items-center justify-between px-2.5 py-2.5 top-4 left-4 bg-skin-editBg" disabled={false} text="Update">
               <FaCircleCheck size={24} />
-            </EditButton>
+            </PrimaryButton>
           </article>
         </Modal>
       </article>

@@ -1,10 +1,10 @@
 import React from "react";
 
 
-interface EditButtonProps {
+interface PrimaryButtonProps {
 
     text?: string;
-    onClick: () => void;
+    onClick?: () => void;
     className: string;
     disabled: boolean;
     type?: "button" | "submit" | "reset";
@@ -12,7 +12,7 @@ interface EditButtonProps {
 
 }
 
-const EditButton: React.FC<EditButtonProps> = ({
+const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     children,
     text,
     onClick,
@@ -24,7 +24,7 @@ const EditButton: React.FC<EditButtonProps> = ({
     return(
         <button
         type={type}
-        className={`px-2.5 py-2.5 bg-skin-editBg text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-skin-primary hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ${className}`}
+        className={` text-skin-primary font-medium text-md leading-tight uppercase rounded-full shadow-md hover:bg-skin-primary hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ${className}`}
         onClick={onClick}
         disabled={disabled}
       >
@@ -34,4 +34,4 @@ const EditButton: React.FC<EditButtonProps> = ({
     )
 }
 
-export default EditButton;
+export default PrimaryButton;
