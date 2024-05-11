@@ -1,4 +1,5 @@
 export interface Venue {
+    
     id: string;
     name: string;
     description: string;
@@ -24,19 +25,24 @@ export interface Venue {
         breakfast: boolean;
         pets: boolean;
     }
-    _owner: {
-      avatar: {
+
+    owner?: {
+      avatar?: {
         url: string;
         alt:string;
       }
-      banner: {
+      banner?: {
         url: string;
         alt:string;
       }
-      bio: string;
+      bio?: string;
       name:string;
+      email:string;
     }
+   
   }
+
+ 
   
   export interface Booking {
     id: string;
@@ -67,16 +73,6 @@ export interface Venue {
     message?: string;
   }
 
-  
-  export type Avatar = {
-    url: string;
-    alt?: string;
-  };
-  
-  export type Banner = {
-    url: string;
-    alt?: string;
-  };
   
   export type User = {
     id?: string;

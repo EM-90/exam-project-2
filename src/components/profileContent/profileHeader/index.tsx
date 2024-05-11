@@ -64,7 +64,10 @@ function ProfileHeader() {
     <div className='container mx-auto my-7 px-7'> 
       <article className="profile-header relative">
         <img className='w-full h-60 object-cover rounded-md absolute' src={user.banner.url} alt={user.banner.alt} />
-        <ProfileBadge name={user.name} email={user.email} avatarUrl={user.avatar.url}/>
+        <div className='absolute avatarSection flex flex-wrap items-center top-6 left-6'>
+          <ProfileBadge name={user.name} email={user.email} avatarUrl={user.avatar.url}/>
+        </div>
+        
         <EditButton onClick={handleButtonClick} className="relative top-4 left-4" disabled={false}>
           <FaCamera size={20} />
         </EditButton>

@@ -7,10 +7,11 @@ import { Venue, } from "../../types";
 import ProfileBadge from "../profileContent/profileHeader/profileBadge";
 
 
+
 function VenueDetails() {
 
     const { venueId } = useParams<{ venueId: string }>();
-    const [venueData, setVenueData] = useState<Venue | null>(null) 
+    const [venueData, setVenueData] = useState<Venue| null>(null) 
    // let navigate = useNavigate();
 
     //const handleClick = (id) => {
@@ -37,6 +38,8 @@ function VenueDetails() {
       },[venueId]);
       
       if (!venueData) return <div>Loading venue details...</div>;
+
+      
 
    
 
@@ -70,10 +73,18 @@ function VenueDetails() {
                             <li className=" flex gap-2  items-center"><FaCat size={32} className=" text-skin-primary"/><strong>Pets allowed</strong> ({venueData.meta.pets ? "Yes" : "No"})</li>
                           </div>
                         </ul>
-                        <ProfileBadge name={venueData.name}/>
                       </section>
                     </section>
-                    
+                    <div className="my-8">
+                      <h3 className=" text-xl font-bold my-4 py-6">Owner of this venue</h3>
+                      {venueData.owner && <ProfileBadge
+                          name={venueData.owner.name}
+                          email={venueData.owner.email}
+                          avatarUrl={venueData.owner.avatar?.url}
+                          avatarAlt={venueData.owner.avatar?.alt}
+                          owner={venueData.owner}
+                      />}
+                    </div>
                 </div>
                 <div className="w-full">
                    <h3>Select your booking period</h3>
