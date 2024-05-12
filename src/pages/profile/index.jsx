@@ -20,7 +20,7 @@ function Profile() {
                 <>
                     <ProfileHeader />
                     <section className="container mx-auto my-7 px-7 z-10">
-                        <PrimaryButton  text="Add Venue" onClick={toggleModal} className="  px-60 py-2.5 bg-skin-createBg hover:bg-skin-infoBg text-skin-tagTextColor outline-dashed outline-cyan-950 shadow-none" disabled={false} />
+                        <PrimaryButton  text="Add Venue" onClick={toggleModal} className="  px-60 py-2.5 bg-skin-createBg  text-skin-tagTextColor outline-dashed outline-cyan-950 shadow-none" disabled={false} />
                         <Modal isOpen={showModal} onClose={toggleModal}>
                             <VenueForm />
                         </Modal>

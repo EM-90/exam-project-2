@@ -96,7 +96,7 @@ function ProfileHeader() {
                 onChange={handleBannerChange}
               />
             </div>
-            <PrimaryButton onClick={handleUpdate} className="pl-5 flex flex-row-reverse items-center justify-between px-2.5 py-2.5 top-4 left-4 bg-skin-editBg" disabled={false} text="Update">
+            <PrimaryButton onClick={handleUpdate} className="pl-5 flex flex-row-reverse items-center justify-between px-2.5 py-2.5 top-4 left-4 bg-skin-editBg text-white" disabled={false} text="Update">
               <FaCircleCheck size={24} />
             </PrimaryButton>
           </article>

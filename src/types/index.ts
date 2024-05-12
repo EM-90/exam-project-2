@@ -40,10 +40,6 @@ export interface Venue {
    
   }
 
-
-
- 
-  
   export interface Booking {
     id: string;
     dateFrom: string;
@@ -87,7 +83,9 @@ export interface Venue {
     banner: {
         url: string;
         alt?: string;
-    };  
+    };
+    venueManager?: boolean;
+    
   
     
 };

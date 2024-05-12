@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useAuth } from '../../../context/authContext'; 
 import validateEmail from '../../../utils/validataEmail';
 
+
 function RegisterForm({ onLoginClick }) {
   const { register } = useAuth();  // Using register from context
   const [errors, setErrors] = useState<{ [key: string]: string }>({
@@ -12,15 +13,21 @@ function RegisterForm({ onLoginClick }) {
   const [data, setFormData] = useState({
     name: '',
     email: '',
-    password: ''
+    password: '',
+    venueManager: false,
   });
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...data, [name]: value });
+    const { name, type, checked, value } = e.target;
+    if (type === 'checkbox') {
+        setFormData({ ...data, [name]: checked });
+        console.log(checked);
+    } else {
+        setFormData({ ...data, [name]: value });
+    }
     setErrors({ ...errors, [name]: '' });
-  };
+};
 
   const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -41,14 +48,13 @@ function RegisterForm({ onLoginClick }) {
     e.preventDefault();
     if (!errors.name && !errors.email && !errors.password) {
       try {
-        await register(data.name, data.email, data.password);
+        await register(data.name, data.email, data.password, data.venueManager);
         setSuccessMessage("Registration successful. You can now log in.");
       } catch (error) {
         console.error('Registration failed:', error);
       }
     }
   };
-
   return (
     <div className='container mx-auto my-7 px-7 min-h-screen flex flex-col justify-center items-center '>
       <h2 className="text-5xl font-light mb-10">Register</h2>
@@ -56,10 +62,13 @@ function RegisterForm({ onLoginClick }) {
         <div className='checkbox flex item-center my-7'>
           <input
             type='checkbox'
-            id="checkbox"
+            id="venueManager"
+            name="venueManager"
+            checked={data.venueManager}
+            onChange={handleChange}
             className="w-5 h-5 rounded border border-gray-300 cursor-pointer focus:outline-none focus:border-skin-primary"
           />
-          <label htmlFor="exampleCheckbox" className="ml-2 cursor-pointer select-none font-medium">
+          <label htmlFor="venueManager" className="ml-2 cursor-pointer select-none font-medium">
             Venue manager access
           </label>
         </div>

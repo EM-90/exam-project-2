@@ -24,7 +24,7 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
     return(
         <button
         type={type}
-        className={` text-skin-primary font-medium text-md leading-tight uppercase rounded-full shadow-md hover:bg-skin-primary hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ${className}`}
+        className={` text-skin-primary font-medium text-md leading-tight uppercase rounded-full shadow-md hover:bg-skin-primary  focus:shadow-lg  focus:ring-0 active:shadow-lg transition duration-150 ease-in-out ${className}`}
         onClick={onClick}
         disabled={disabled}
       >

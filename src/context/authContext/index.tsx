@@ -10,7 +10,7 @@ interface AuthContextType {
     setUser: (user: User) => void;
     login: (email: string, password: string) => Promise<void>;
     logout: () => void;
-    register: (name: string, email: string, password: string) => Promise<void>;
+    register: (name: string, email: string, password: string, venueManager: boolean) => Promise<void>;
     saveUserToLocalStorage: (user: User) => void;
     getUserFromLocalStorage: () => User | null;
     removeUserFromLocalStorage: () => void;
@@ -46,6 +46,7 @@ export const AuthProvider: FunctionComponent<{ children: ReactNode }> = ({ child
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+
     useEffect(() => {
         if (user) {
             saveUserToLocalStorage(user);
@@ -78,11 +79,14 @@ export const AuthProvider: FunctionComponent<{ children: ReactNode }> = ({ child
         setUser(null);
     };
 
-    const register = async (name: string, email: string, password: string) => {
+    const register = async (name: string, email: string, password: string, venueManager: boolean ) => {
         setLoading(true);
         setError(null);
         try {
-            const newUser = await authAPI.register({ name, email, password });
+            const newUser = await authAPI.register({
+                name, email, password,
+                venueManager
+            });
             if (newUser && newUser.accessToken) {
                 setUser(newUser);
                 saveUserToLocalStorage(newUser);
