@@ -3,8 +3,8 @@ import { Profile, ApiResponse } from "../../types";
 
 
 export const profileAPI = {
-    fetchProfile(id: string) {
-      return apiClient.get<ApiResponse<Profile>>(`/holidaze/profiles/${id}`);
+    fetchProfile(name: string) {
+      return apiClient.get<ApiResponse<Profile>>(`/holidaze/profiles/${name}/venues`);
     },
      async updateProfile(id: string, profileData: Partial<Profile>) {
       const response = await apiClient.put<ApiResponse<Profile>>(`/holidaze/profiles/${id}`, profileData);

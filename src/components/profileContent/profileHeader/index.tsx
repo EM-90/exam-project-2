@@ -61,7 +61,7 @@ function ProfileHeader() {
   };
 
   return (
-    <div className='container mx-auto my-7 px-7'> 
+    <div className='my-7'> 
       <article className="profile-header relative">
         <img className='w-full h-60 object-cover rounded-md' src={user.banner.url} alt={user.banner.alt} />
         <div className='absolute avatarSection flex flex-wrap items-center top-6 left-6'>
