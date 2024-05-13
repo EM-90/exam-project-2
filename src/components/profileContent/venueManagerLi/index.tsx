@@ -2,9 +2,9 @@ import React from 'react'
 import { FaLocationDot, FaPen, FaTrash } from "react-icons/fa6";
 import PrimaryButton from '../../buttons/primaryButton';
 
-function VenueManagerLi({venue}) {
+function VenueManagerLi({venue, onClick}) {
   return (
-    <article className=' my-2 flex justify-between bg-skin-createBg p-5 rounded-md'>
+    <article onClick={onClick} className=' my-2 flex justify-between bg-skin-createBg p-5 rounded-md'>
         <section className=' flex items-center gap-5'>
         <div className='flex gap-2 items-center'>
             <FaLocationDot className=' text-skin-tagTextColor' size={30} />

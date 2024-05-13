@@ -8,6 +8,7 @@ import Modal from "../../components/modal";
 import PrimaryButton from "../../components/buttons/primaryButton";
 import { profileAPI } from "../../api/profiles";
 import VenueManagerLi from "../../components/profileContent/venueManagerLi";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -18,6 +19,12 @@ function Profile() {
     const [showModal, setShowModal] = useState(false);
     const toggleModal = () => setShowModal(prev => !prev);
     const [venues, setVenues] = useState([]);
+    let navigate = useNavigate();
+
+    const handleClick = (id) => {
+      navigate(`/venue/${id}`);
+    };
+  
 
   
  
@@ -53,7 +60,7 @@ function Profile() {
                      <section>
                      
                         {venues.map(venue => (
-                            <VenueManagerLi key={venue.id} venue={venue} />
+                            <VenueManagerLi key={venue.id} venue={venue} onClick={() => handleClick(venue.id)} />
                         ))}
                      </section>
                 </>
