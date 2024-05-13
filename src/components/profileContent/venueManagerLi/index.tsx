@@ -4,7 +4,7 @@ import PrimaryButton from '../../buttons/primaryButton';
 
 function VenueManagerLi({venue}) {
   return (
-    <article className=' flex justify-between bg-skin-createBg p-5 rounded-md'>
+    <article className=' my-2 flex justify-between bg-skin-createBg p-5 rounded-md'>
         <section className=' flex items-center gap-5'>
         <div className='flex gap-2 items-center'>
             <FaLocationDot className=' text-skin-tagTextColor' size={30} />
@@ -20,11 +20,11 @@ function VenueManagerLi({venue}) {
         </div>
            
         </section>
-        <section className='flex gap-10'>
+        <section className='flex gap-7'>
             <PrimaryButton className='trashIcon bg-skin-editBg p-4 text-white' disabled={false}>
              <FaPen size={20} />
             </PrimaryButton>
-            <PrimaryButton className='trashIcon bg-skin-editBg p-4 text-red-200' disabled={false}>
+            <PrimaryButton className='trashIcon bg-red-400 p-4 text-white hover:bg-red-600' disabled={false}>
              <FaTrash size={20} />
             </PrimaryButton>
         </section>
@@ -33,4 +33,4 @@ function VenueManagerLi({venue}) {
   )
 }
 
-export default VenueManagerLi
+export default VenueManagerLi;

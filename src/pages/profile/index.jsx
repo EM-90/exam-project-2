@@ -8,7 +8,7 @@ import Modal from "../../components/modal";
 import PrimaryButton from "../../components/buttons/primaryButton";
 import { profileAPI } from "../../api/profiles";
 import VenueManagerLi from "../../components/profileContent/venueManagerLi";
-import getUserFromLocalStorage from "../../helpers/getFromLocalStorage";
+
 
 
 function Profile() {
@@ -44,13 +44,14 @@ function Profile() {
                 <>
                     <ProfileHeader />
                     <section>
-                        <PrimaryButton  text="Add Venue" onClick={toggleModal} className="  px-60 py-2.5 bg-skin-createBg  text-skin-tagTextColor outline-dashed outline-cyan-950 shadow-none" disabled={false} />
+                        <h2 className="my-5 text-4xl font-bold text-skin-tagTextColor">Venues you manage</h2>
+                        <PrimaryButton  text="Add Venue" onClick={toggleModal} className=" my-4 w-full rounded-md py-2.5 bg-skin-createBg text-skin-tagTextColor hover:bg-skin-infoBg outline-dashed outline-cyan-950 shadow-none" disabled={false} />
                         <Modal isOpen={showModal} onClose={toggleModal}>
                             <VenueForm />
                         </Modal>
                      </section>
                      <section>
-                     <h2>Your Venues</h2>
+                     
                         {venues.map(venue => (
                             <VenueManagerLi key={venue.id} venue={venue} />
                         ))}
