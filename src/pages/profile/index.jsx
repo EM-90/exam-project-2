@@ -51,7 +51,7 @@ function Profile() {
                 <>
                     <ProfileHeader />
                     <section>
-                        <h2 className="my-5 text-4xl font-bold text-skin-tagTextColor">Venues you manage</h2>
+                        <h2 className="my-5 text-5xl font-light text-skin-tagTextColor">Venues you manage</h2>
                         <PrimaryButton  text="Add Venue" onClick={toggleModal} className=" my-4 w-full rounded-md py-2.5 bg-skin-createBg text-skin-tagTextColor hover:bg-skin-infoBg outline-dashed outline-cyan-950 shadow-none" disabled={false} />
                         <Modal isOpen={showModal} onClose={toggleModal}>
                             <VenueForm />

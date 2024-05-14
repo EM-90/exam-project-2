@@ -21,10 +21,10 @@ function VenueManagerLi({venue, onClick}) {
            
         </section>
         <section className='flex gap-7'>
-            <PrimaryButton className='trashIcon bg-skin-editBg p-4 text-white' disabled={false}>
+            <PrimaryButton className='trashIcon bg-skin-editBg hover:bg-skin-primary p-4 text-white' disabled={false}>
              <FaPen size={20} />
             </PrimaryButton>
-            <PrimaryButton className='trashIcon bg-red-400 p-4 text-white hover:bg-red-600' disabled={false}>
+            <PrimaryButton className='trashIcon bg-red-400 p-4 text-white hover:bg-red-500 ' disabled={false}>
              <FaTrash size={20} />
             </PrimaryButton>
         </section>
