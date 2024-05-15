@@ -27,3 +27,13 @@ export const handleCreate = async (event: FormEvent, formData: any) => {
     }
 };
 
+export const handleDelete = async (id: string, setVenues: React.Dispatch<React.SetStateAction<any[]>>, venues: any[]) => {
+    try {
+        await venueAPI.deleteVenue(id);
+        setVenues(venues.filter(venue => venue.id !== id));
+    } catch (error) {
+        console.error('Failed to delete venue:', error);
+    }
+};
+
+

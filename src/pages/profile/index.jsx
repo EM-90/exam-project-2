@@ -10,7 +10,7 @@ import { profileAPI } from "../../api/profiles";
 import VenueManagerLi from "../../components/profileContent/venueManagerLi";
 import { useNavigate } from "react-router-dom";
 import useVenueForm from "../../hooks/useVenueForm";
-import { handleCreate, handleUpdate } from "../../helpers/handlers";
+import { handleCreate, handleUpdate, handleDelete } from "../../helpers/handlers";
 
 function Profile() {
     const { user } = useAuth();
@@ -95,6 +95,7 @@ function Profile() {
                                 venue={venue}
                                 onClick={() => handleClick(venue.id)}
                                 onEdit={() => openModal(venue.id)}
+                                onDelete={() => handleDelete(venue.id, setVenues, venues)}
                             />
                         ))}
                     </section>
