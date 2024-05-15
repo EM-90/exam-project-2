@@ -14,8 +14,8 @@ const DateRangePicker: React.FC = () => {
                     startDate={startDate}
                     endDate={endDate}
                     onChange={update => setDateRange(update)}
-                    className="w-full"
-                    inline
+                    className="w-full border p-2"
+                    withPortal
                 />
             </div>
         </form>
