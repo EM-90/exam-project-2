@@ -9,25 +9,48 @@ import PrimaryButton from "../../components/buttons/primaryButton";
 import { profileAPI } from "../../api/profiles";
 import VenueManagerLi from "../../components/profileContent/venueManagerLi";
 import { useNavigate } from "react-router-dom";
-
-
+import useVenueForm from "../../hooks/useVenueForm";
+import { handleCreate, handleUpdate } from "../../helpers/handlers";
 
 function Profile() {
     const { user } = useAuth();
     const [showRegisterForm, setShowRegisterForm] = useState(false);
     const toggleForm = () => setShowRegisterForm(prev => !prev);
     const [showModal, setShowModal] = useState(false);
-    const toggleModal = () => setShowModal(prev => !prev);
+    const [selectedVenueId, setSelectedVenueId] = useState();
     const [venues, setVenues] = useState([]);
+    const [formData, handleChange, resetFormData] = useVenueForm(selectedVenueId);
     let navigate = useNavigate();
 
-    const handleClick = (id) => {
-      navigate(`/venue/${id}`);
-    };
-  
+    const toggleModal = () => setShowModal(prev => !prev);
 
-  
- 
+    const openModal = (venueId) => {
+        setSelectedVenueId(venueId);
+        if(!venueId) {
+            resetFormData()
+        }
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+        setSelectedVenueId(null);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (selectedVenueId) {
+            handleUpdate(event, selectedVenueId, formData);
+        } else {
+            handleCreate(event, formData);
+        }
+        closeModal();
+    };
+
+    const handleClick = (id) => {
+        navigate(`/venue/${id}`);
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             if (user && user.name) {
@@ -43,8 +66,6 @@ function Profile() {
         fetchData();
     }, [user]);
 
-    
-
     return (
         <main className="container mx-auto my-7 px-7 z-10">
             {user ? (
@@ -52,17 +73,31 @@ function Profile() {
                     <ProfileHeader />
                     <section>
                         <h2 className="my-5 text-5xl font-light text-skin-tagTextColor">Venues you manage</h2>
-                        <PrimaryButton  text="Add Venue" onClick={toggleModal} className=" my-4 w-full rounded-md py-2.5 bg-skin-createBg text-skin-tagTextColor hover:bg-skin-infoBg outline-dashed outline-cyan-950 shadow-none" disabled={false} />
+                        <PrimaryButton
+                            text="Add Venue"
+                            onClick={() => openModal(null)}
+                            className="my-4 w-full rounded-md py-2.5 bg-skin-createBg text-skin-tagTextColor hover:bg-skin-infoBg outline-dashed outline-cyan-950 shadow-none"
+                            disabled={false}
+                        />
                         <Modal isOpen={showModal} onClose={toggleModal}>
-                            <VenueForm />
+                            <VenueForm
+                                handleSubmit={handleSubmit}
+                                handleChange={handleChange}
+                                formData={formData}
+                                venueId={selectedVenueId}
+                            />
                         </Modal>
-                     </section>
-                     <section>
-                     
+                    </section>
+                    <section>
                         {venues.map(venue => (
-                            <VenueManagerLi key={venue.id} venue={venue} onClick={() => handleClick(venue.id)} />
+                            <VenueManagerLi
+                                key={venue.id}
+                                venue={venue}
+                                onClick={() => handleClick(venue.id)}
+                                onEdit={() => openModal(venue.id)}
+                            />
                         ))}
-                     </section>
+                    </section>
                 </>
             ) : (
                 <section>
@@ -78,5 +113,7 @@ function Profile() {
 }
 
 export default Profile;
+
+
 
 

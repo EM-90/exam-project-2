@@ -2,25 +2,27 @@ import { useState, useEffect } from 'react';
 import { venueAPI } from '../../api/venue';
 import { Venue } from '../../types';
 
-const useVenueForm = (venueId: string | null): [Venue, (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void] => {
-    const [formData, setFormData] = useState<Venue>({
-        name: '',
-        description: '',
-        price: 0,
-        maxGuests: 0,
-        media: [{ url: '', alt: '' }],
-        meta: {
-            wifi: false,
-            parking: false,
-            breakfast: false,
-            pets: false
-        },
-        location: {
-            address: '',
-            city: '',
-            country: ''
-        }
-    });
+const initialFormData: Venue = {
+    name: '',
+    description: '',
+    price: 0,
+    maxGuests: 0,
+    media: [{ url: '', alt: '' }],
+    meta: {
+        wifi: false,
+        parking: false,
+        breakfast: false,
+        pets: false
+    },
+    location: {
+        address: '',
+        city: '',
+        country: ''
+    }
+};
+
+const useVenueForm = (venueId: string | null): [Venue, (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void, () => void] => {
+    const [formData, setFormData] = useState<Venue>(initialFormData);
 
     useEffect(() => {
         if (venueId) {
@@ -28,56 +30,56 @@ const useVenueForm = (venueId: string | null): [Venue, (event: React.ChangeEvent
                 try {
                     const response = await venueAPI.fetchVenueById(venueId);
                     const venueData: Venue = response.data.data;
-                    venueData.media = venueData.media ?? [{ url: '', alt: '' }];
+                    venueData.media = venueData.media && venueData.media.length > 0 ? venueData.media : [{ url: '', alt: '' }];
                     setFormData(venueData);
                 } catch (error) {
                     console.error('Failed to fetch venue:', error);
                 }
             };
             fetchVenue();
+        } else {
+            setFormData(initialFormData);
         }
     }, [venueId]);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value, type } = event.target;
 
-        if (type === 'checkbox' && event.target instanceof HTMLInputElement) {
-            const { checked } = event.target;
-            setFormData(prev => ({
-                ...prev,
-                meta: {
-                    ...prev.meta,
-                    [name]: checked
-                }
-            }));
-        } else if (name.includes('media')) {
-            const [ index, key] = name.split('.');
-            const updatedMedia = [...(formData.media || [])];
-            updatedMedia[parseInt(index)][key] = value;
+        setFormData(prevFormData => {
+            const newFormData = { ...prevFormData };
 
-            setFormData(prev => ({
-                ...prev,
-                media: updatedMedia
-            }));
-        } else if (name.includes('location')) {
-            const [key, subkey] = name.split('.');
-            setFormData(prev => ({
-                ...prev,
-                [key]: {
-                    ...prev[key],
-                    [subkey]: value
-                }
-            }));
-        } else {
-            setFormData(prev => ({
-                ...prev,
-                [name]: type === 'number' ? parseInt(value, 10) : value
-            }));
-        }
+            if (name.startsWith('media.')) {
+                const [_, index, field] = name.split('.');
+                if (!newFormData.media) newFormData.media = [];
+                if (!newFormData.media[+index]) newFormData.media[+index] = { url: '', alt: '' };
+                newFormData.media[+index][field] = value;
+            } else if (name.startsWith('location.')) {
+                const field = name.split('.')[1];
+                newFormData.location = { ...newFormData.location, [field]: value };
+            } else if (type === 'checkbox' && event.target instanceof HTMLInputElement) {
+                newFormData.meta[name] = event.target.checked;
+            } else {
+                newFormData[name] = type === 'number' ? parseInt(value, 10) : value;
+            }
+
+            return newFormData;
+        });
     };
 
-    return [formData, handleChange];
+    const resetFormData = () => setFormData(initialFormData);
+
+    return [formData, handleChange, resetFormData];
 };
 
 export default useVenueForm;
+
+
+
+
+
+
+
+
+
+
 

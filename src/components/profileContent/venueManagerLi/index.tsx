@@ -2,7 +2,7 @@ import React from 'react'
 import { FaLocationDot, FaPen, FaTrash } from "react-icons/fa6";
 import PrimaryButton from '../../buttons/primaryButton';
 
-function VenueManagerLi({venue, onClick}) {
+function VenueManagerLi({venue, onClick, onEdit}) {
   return (
     <article onClick={onClick} className=' cursor-pointer my-2 flex justify-between bg-skin-createBg p-5 rounded-md'>
         <section className=' flex items-center gap-5'>
@@ -21,7 +21,7 @@ function VenueManagerLi({venue, onClick}) {
            
         </section>
         <section className='flex gap-7'>
-            <PrimaryButton className='trashIcon bg-skin-editBg hover:bg-skin-primary p-4 text-white' disabled={false}>
+            <PrimaryButton className='trashIcon bg-skin-editBg hover:bg-skin-primary p-4 text-white' disabled={false}   onClick={(e) => {e.stopPropagation();onEdit();}}>
              <FaPen size={20} />
             </PrimaryButton>
             <PrimaryButton className='trashIcon bg-red-400 p-4 text-white hover:bg-red-500 ' disabled={false}>
