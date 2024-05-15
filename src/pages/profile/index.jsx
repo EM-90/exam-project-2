@@ -65,6 +65,7 @@ function Profile() {
 
         fetchData();
     }, [user]);
+console.log(venues);
 
     return (
         <main className="container mx-auto my-7 px-7 z-10">

@@ -24,6 +24,9 @@ function VenueManagerLi({venue, onClick, onEdit, onDelete}) {
             <h4 className='font-semibold text-skin-mutedText'>Address</h4>
             <p className='text-skin-primary text-xl'><span>{venue.location.city}</span>, <span>{venue.location.address}</span></p>
         </div>
+        <div className='text-md self-end px-5 border-x-2'>
+          <p className='text-skin-tagTextColor text-xl'>Bookings: <span className='font-medium'>{venue._count.bookings}</span></p>
+        </div>
            
         </section>
         <section className='flex gap-7'>
