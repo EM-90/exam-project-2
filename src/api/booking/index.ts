@@ -1,5 +1,5 @@
 import apiClient from "../apiClient";
-import { Booking, ApiResponse } from "../../types";
+import { Booking, ApiResponse, NewBooking } from "../../types";
 
 
 export const bookingAPI = {
@@ -9,7 +9,7 @@ export const bookingAPI = {
     fetchBookingById(id: string) {
       return apiClient.get<ApiResponse<Booking>>(`/holidaze/bookings/${id}`);
     },
-    createBooking(bookingData: Booking) {
+    createBooking(bookingData: NewBooking) {
       return apiClient.post<ApiResponse<Booking>>('/holidaze/bookings', bookingData);
     },
     updateBooking(id: string, bookingData: Partial<Booking>) {

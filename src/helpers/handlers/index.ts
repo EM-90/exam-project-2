@@ -1,6 +1,8 @@
 
 import { FormEvent } from 'react';
 import { venueAPI } from '../../api/venue';
+import { bookingAPI } from '../../api/booking';
+import { NewBooking } from '../../types';
 
 export const handleUpdate = async (event: FormEvent, venueId: string, formData: any) => {
     event.preventDefault();
@@ -36,4 +38,24 @@ export const handleDelete = async (id: string, setVenues: React.Dispatch<React.S
     }
 };
 
+
+export const handleBookingSubmit = async (venueId: string, bookingData: { dateFrom: Date; dateTo: Date; guests: number }) => {
+    try {
+      const newBooking: NewBooking = {
+        dateFrom: bookingData.dateFrom.toISOString(),
+        dateTo: bookingData.dateTo.toISOString(),
+        guests: bookingData.guests,
+        venueId: venueId
+      };
+  
+      const response = await bookingAPI.createBooking(newBooking);
+  
+      if (response.data) {
+        alert("Booking successful!");
+      }
+    } catch (error) {
+      console.error("Error creating booking", error);
+      alert("Failed to create booking. Please try again.");
+    }
+  };
 

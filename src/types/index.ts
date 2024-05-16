@@ -1,4 +1,5 @@
 export interface Venue {
+    bookings: Booking[];
     
     id?: string;
     name: string;
@@ -45,7 +46,17 @@ export interface Venue {
     dateFrom: string;
     dateTo: string;
     guests: number;
+    venueId: string;
+  
   }
+
+  export interface NewBooking {
+    dateFrom: string;
+    dateTo: string;
+    guests: number;
+    venueId: string;
+  }
+  
   
  
   export interface Profile {
