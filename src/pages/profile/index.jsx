@@ -13,6 +13,7 @@ import useVenueForm from "../../hooks/useVenueForm";
 import { handleCreate, handleUpdate, handleDelete } from "../../helpers/handlers";
 import BookingLi from "../../components/profileContent/bookingLi";
 
+
 function Profile() {
   const { user } = useAuth();
   const [showRegisterForm, setShowRegisterForm] = useState(false);
@@ -22,7 +23,7 @@ function Profile() {
   const [venues, setVenues] = useState([]);
   const [userBookings, setUserBookings] = useState([]);
   const [formData, handleChange, resetFormData] = useVenueForm(selectedVenueId);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const toggleModal = () => setShowModal(prev => !prev);
 
@@ -53,15 +54,23 @@ function Profile() {
     navigate(`/venue/${id}`);
   };
 
+  const fetchBookings = async () => {
+    try {
+      const bookingResponse = await profileAPI.fetchProfileBookings(user.name, 'true');
+      const sortedBookings = bookingResponse.data.data.bookings.sort((a, b) => new Date(b.dateFrom) - new Date(a.dateFrom));
+      setUserBookings(sortedBookings);
+    } catch (error) {
+      console.error('Failed to fetch bookings:', error);
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       if (user && user.name) {
         try {
           const response = await profileAPI.fetchProfile(user.name);
           setVenues(response.data.data);
-
-          const bookingResponse = await profileAPI.fetchProfileBookings(user.name, 'true');
-          setUserBookings(bookingResponse.data.data.bookings); 
+          await fetchBookings();
         } catch (error) {
           console.error('Failed to fetch data:', error);
         }
@@ -105,9 +114,9 @@ function Profile() {
             ))}
           </section>
           <section>
-            <h2 className="my-7 pt-5 text-5xl font-light text-skin-tagTextColor">Your Bookings</h2>
-            {userBookings.map(booking => (
-              <BookingLi key={booking.id} booking={booking} />
+            <h2 className="my-5 text-5xl font-light text-skin-tagTextColor">Your Bookings</h2>
+            {userBookings.map((booking) => (
+                <BookingLi key={booking.id} booking={booking} />
             ))}
           </section>
         </>
@@ -125,6 +134,8 @@ function Profile() {
 }
 
 export default Profile;
+
+
 
 
 

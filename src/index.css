@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+
+  .fade-out-bg {
+    @apply animate-fadeOutBackground;
+  }
  
 :root {
   /* Primary Colors */
@@ -26,6 +30,7 @@
   --margin-image: 10px;
 
   }
+
 }
 
 

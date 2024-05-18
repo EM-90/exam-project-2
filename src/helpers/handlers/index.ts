@@ -3,6 +3,7 @@ import { FormEvent } from 'react';
 import { venueAPI } from '../../api/venue';
 import { bookingAPI } from '../../api/booking';
 import { NewBooking } from '../../types';
+import { useNavigate } from 'react-router-dom';
 
 export const handleUpdate = async (event: FormEvent, venueId: string, formData: any) => {
     event.preventDefault();
@@ -39,7 +40,7 @@ export const handleDelete = async (id: string, setVenues: React.Dispatch<React.S
 };
 
 
-export const handleBookingSubmit = async (venueId: string, bookingData: { dateFrom: Date; dateTo: Date; guests: number }) => {
+export const handleBookingSubmit = async ( venueId: string, bookingData: { dateFrom: Date; dateTo: Date; guests: number }, navigate: ReturnType<typeof useNavigate>) => {
     try {
       const newBooking: NewBooking = {
         dateFrom: bookingData.dateFrom.toISOString(),
@@ -52,6 +53,8 @@ export const handleBookingSubmit = async (venueId: string, bookingData: { dateFr
   
       if (response.data) {
         alert("Booking successful!");
+        navigate('/profile');
+        
       }
     } catch (error) {
       console.error("Error creating booking", error);

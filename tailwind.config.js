@@ -14,7 +14,6 @@ export default {
           editColor: 'var(--edit-color)',
           tagTextColor: 'var(--tag-text-color)',
           deleteColor: 'var(--delete-color)',
-
           mutedText: 'var(--gray-text)',
         }
       },
@@ -32,12 +31,21 @@ export default {
         skin: {
           innerBorderNewLi: 'var(--inner-color-new-item)',
           liAnimateColor: 'var(--list-item-animation-color)',
-          InputBorder: 'var(--primary-color)'
+          InputBorder: 'var(--primary-color)',
         }
       },
-      
+      keyframes: {
+        fadeOutBackground: {
+          '0%': { backgroundColor: 'rgba(144, 238, 144, 1)' },
+          '100%': { backgroundColor: 'rgba(144, 238, 144, 0)' },
+        },
+      },
+      animation: {
+        fadeOutBackground: 'fadeOutBackground 2s forwards',
+      },
     },
   },
   plugins: [],
 }
+
 

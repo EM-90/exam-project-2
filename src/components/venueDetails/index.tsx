@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import DateRangePicker from '../calendar';
 import { FaCat, FaWifi, FaEgg, FaSquareParking } from 'react-icons/fa6';
 import { venueAPI } from '../../api/venue';
@@ -11,6 +11,7 @@ const VenueDetails: React.FC = () => {
   const { venueId } = useParams<{ venueId: string }>();
   const [venueData, setVenueData] = useState<Venue | null>(null);
   const [bookings, setBookings] = useState<Booking[]>([]);
+  let navigate = useNavigate();
   
   useEffect(() => {
     const fetchVenueData = async () => {
@@ -20,7 +21,6 @@ const VenueDetails: React.FC = () => {
           setVenueData(response.data.data);
           console.log("Venue Data:", response.data.data);
           
-          // Extract bookings from the response and set the state
           const { bookings } = response.data.data;
           if (bookings && bookings.length > 0) {
             setBookings(bookings);
@@ -41,7 +41,7 @@ const VenueDetails: React.FC = () => {
 
   const handleSubmit = (bookingData: { dateFrom: Date; dateTo: Date; guests: number }) => {
     if (venueId) {
-      handleBookingSubmit(venueId, bookingData);
+      handleBookingSubmit(venueId, bookingData, navigate);
     } else {
       alert("Venue ID is not available.");
     }

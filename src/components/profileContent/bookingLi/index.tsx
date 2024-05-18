@@ -7,9 +7,9 @@ function BookingLi({ booking }) {
   const { location } = venue || {};
 
   return (
-    <article className=" border-t-2 hover:bg-skin-createBg hover:rounded-bottom py-5 px-4 hover:shadow-md ">
-      <div className='flex justify-between' >
-      <div className='flex  gap-7'>
+    <article className="w-full p border-t-2 hover:bg-skin-createBg hover:rounded-bottom py-5 px-4 hover:shadow-md last:border-b-2 ">
+      <div className='flex justify-between flex-wrap ' >
+      <div className='flex  gap-7 flex-wrap'>
         <div>
           {venue.media && venue.media.length > 0 && (
             <img src={venue.media[0].url} alt={venue.media[0].alt || 'Venue image'} className="object-cover min-h-32 max-h-32 min-w-44 max-w-44 rounded-lg shadow-md" />
@@ -26,10 +26,10 @@ function BookingLi({ booking }) {
           </div>
         </div>
         </div>
-        <div className='userBookings flex flex-col gap-4 items-end'>
-          <div>
-            <p>From: {new Date(dateFrom).toLocaleDateString()}</p>
-            <p className=''>To: {new Date(dateTo).toLocaleDateString()}</p>
+        <div className='userBookings flex gap-4'>
+          <div className=' text-right'>
+            <p className='font-semibold text-skin-mutedText text-lg'>From - <span className='text-skin-primary text-lg'>{new Date(dateFrom).toLocaleDateString()}</span> </p>
+            <p className='font-semibold text-skin-mutedText text-lg'>To - <span className='text-skin-primary text-lg'>{new Date(dateTo).toLocaleDateString()}</span></p>
           </div>
           <div>
              <PrimaryButton className='penIcon bg-skin-editBg hover:bg-skin-primary p-4 text-white' disabled={false} >
