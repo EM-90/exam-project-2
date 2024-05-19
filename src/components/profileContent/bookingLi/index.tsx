@@ -2,12 +2,13 @@ import React from 'react';
 import PrimaryButton from '../../buttons/primaryButton';
 import { FaPen } from 'react-icons/fa';
 
-function BookingLi({ booking }) {
+function BookingLi({ booking, onClick }) {
   const { venue, dateFrom, dateTo } = booking;
   const { location } = venue || {};
+  
 
   return (
-    <article className="w-full p border-t-2 hover:bg-skin-createBg hover:rounded-bottom py-5 px-4 hover:shadow-md last:border-b-2 ">
+    <article onClick={onClick} className="w-full p border-t-2 hover:bg-skin-createBg hover:rounded-bottom py-5 px-4 hover:shadow-md last:border-b-2 ">
       <div className='flex justify-between flex-wrap ' >
       <div className='flex  gap-7 flex-wrap'>
         <div>

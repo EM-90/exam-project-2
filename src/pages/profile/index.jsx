@@ -51,13 +51,14 @@ function Profile() {
   };
 
   const handleClick = (id) => {
+    console.log(`Navigating to venue with ID: ${id}`);
     navigate(`/venue/${id}`);
   };
 
   const fetchBookings = async () => {
     try {
       const bookingResponse = await profileAPI.fetchProfileBookings(user.name, 'true');
-      const sortedBookings = bookingResponse.data.data.bookings.sort((a, b) => new Date(b.dateFrom) - new Date(a.dateFrom));
+      const sortedBookings = bookingResponse.data.data.bookings.sort((a, b) => new Date(b.created) - new Date(a.created));
       setUserBookings(sortedBookings);
     } catch (error) {
       console.error('Failed to fetch bookings:', error);
@@ -116,7 +117,7 @@ function Profile() {
           <section>
             <h2 className="my-5 text-5xl font-light text-skin-tagTextColor">Your Bookings</h2>
             {userBookings.map((booking) => (
-                <BookingLi key={booking.id} booking={booking} />
+              <BookingLi key={booking.id} booking={booking} onClick={() => handleClick(booking.venue.id)} />
             ))}
           </section>
         </>
