@@ -13,7 +13,6 @@ import useVenueForm from "../../hooks/useVenueForm";
 import { handleCreate, handleUpdate, handleDelete } from "../../helpers/handlers";
 import BookingLi from "../../components/profileContent/bookingLi";
 
-
 function Profile() {
   const { user } = useAuth();
   const [showRegisterForm, setShowRegisterForm] = useState(false);
@@ -86,34 +85,38 @@ function Profile() {
       {user ? (
         <>
           <ProfileHeader />
-          <section>
-            <h2 className="my-5 text-5xl font-light text-skin-tagTextColor">Venues you manage</h2>
-            <PrimaryButton
-              text="Add Venue"
-              onClick={() => openModal(null)}
-              className="my-4 w-full rounded-md py-2.5 bg-skin-createBg text-skin-tagTextColor hover:bg-skin-infoBg outline-dashed outline-cyan-950 shadow-none"
-              disabled={false}
-            />
-            <Modal isOpen={showModal} onClose={toggleModal}>
-              <VenueForm
-                handleSubmit={handleSubmit}
-                handleChange={handleChange}
-                formData={formData}
-                venueId={selectedVenueId}
-              />
-            </Modal>
-          </section>
-          <section>
-            {venues.map(venue => (
-              <VenueManagerLi
-                key={venue.id}
-                venue={venue}
-                onClick={() => handleClick(venue.id)}
-                onEdit={() => openModal(venue.id)}
-                onDelete={() => handleDelete(venue.id, setVenues, venues)}
-              />
-            ))}
-          </section>
+          {user.venueManager && (
+            <>
+              <section>
+                <h2 className="my-5 text-5xl font-light text-skin-tagTextColor">Venues you manage</h2>
+                <PrimaryButton
+                  text="Add Venue"
+                  onClick={() => openModal(null)}
+                  className="my-4 w-full rounded-md py-2.5 bg-skin-createBg text-skin-tagTextColor hover:bg-skin-infoBg outline-dashed outline-cyan-950 shadow-none"
+                  disabled={false}
+                />
+                <Modal isOpen={showModal} onClose={toggleModal}>
+                  <VenueForm
+                    handleSubmit={handleSubmit}
+                    handleChange={handleChange}
+                    formData={formData}
+                    venueId={selectedVenueId}
+                  />
+                </Modal>
+              </section>
+              <section>
+                {venues.map(venue => (
+                  <VenueManagerLi
+                    key={venue.id}
+                    venue={venue}
+                    onClick={() => handleClick(venue.id)}
+                    onEdit={() => openModal(venue.id)}
+                    onDelete={() => handleDelete(venue.id, setVenues, venues)}
+                  />
+                ))}
+              </section>
+            </>
+          )}
           <section>
             <h2 className="my-5 text-5xl font-light text-skin-tagTextColor">Your Bookings</h2>
             {userBookings.map((booking) => (
@@ -135,6 +138,7 @@ function Profile() {
 }
 
 export default Profile;
+
 
 
 
