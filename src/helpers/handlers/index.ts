@@ -18,12 +18,12 @@ export const handleUpdate = async (event: FormEvent, venueId: string, formData: 
 };
 
 
-export const handleCreate = async (event: FormEvent, formData: any) => {
+export const handleCreate = async (event: FormEvent, formData: any, onSuccess: (newVenue: any) => void) => {
     event.preventDefault();
     try {
         const response = await venueAPI.createVenue(formData);
-        alert('Venue created successfully!');
-        console.log(response);
+        const newVenue = response.data.data;
+        onSuccess(newVenue);
     } catch (error) {
         console.error('Failed to create venue:', error);
         alert('Failed to create venue.');

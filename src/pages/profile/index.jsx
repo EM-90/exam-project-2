@@ -39,14 +39,16 @@ function Profile() {
     setSelectedVenueId(null);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (selectedVenueId) {
-      handleUpdate(event, selectedVenueId, formData);
+      await handleUpdate(event, selectedVenueId, formData);
     } else {
-      handleCreate(event, formData);
+      await handleCreate(event, formData, (newVenue) => {
+        setVenues((prevVenues) => [newVenue, ...prevVenues]); 
+        closeModal();
+      });
     }
-    closeModal();
   };
 
   const handleClick = (id) => {
