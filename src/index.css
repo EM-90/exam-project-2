@@ -11,18 +11,18 @@
 :root {
   /* Primary Colors */
   
-  --primary-color: #1627A7;
-  --background-color: #F1F3FF;
+  --primary-color: #821F12;
+  --background-color: #FFF9F1;
   --hover-color: #F0F9FF;
   --list-item-animation-color: #F5FFF0;
   --edit-color: #E9EBFF;
-  --edit-bg-color: #475AE7;
+  --edit-bg-color: #;
   --inner-color-new-item: #66FF63;
   --tag-text-color: #000E78;
   --tag-bg-color: #D6DBFF;
   --delete-color: #484848;
   --delete-bg-color: #E0E0E0;
-  --info-modal-bg: #BEC6FF;
+  --info-modal-bg: #FFEFD9;
   --gray-text: #686868
 
   /* Padding */

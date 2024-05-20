@@ -8,7 +8,7 @@ function BookingLi({ booking, onClick }) {
   
 
   return (
-    <article onClick={onClick} className="w-full p border-t-2 hover:bg-skin-createBg hover:rounded-bottom py-5 px-4 hover:shadow-md last:border-b-2 ">
+    <article onClick={onClick} className="w-full p border-b-2 last:border-b-0 hover:bg-skin-createBg hover:rounded-bottom py-5 px-4 ">
       <div className='flex justify-between flex-wrap ' >
       <div className='flex  gap-7 flex-wrap'>
         <div>

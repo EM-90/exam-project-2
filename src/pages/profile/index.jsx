@@ -90,11 +90,11 @@ function Profile() {
           {user.venueManager && (
             <>
               <section>
-                <h2 className="my-5 text-5xl font-light text-skin-tagTextColor">Venues you manage</h2>
+                <h2 className="my-5 text-4xl font-regular mt-10 text-black">My Venues</h2>
                 <PrimaryButton
                   text="Add Venue"
                   onClick={() => openModal(null)}
-                  className="my-4 w-full rounded-md py-2.5 bg-skin-createBg text-skin-tagTextColor hover:bg-skin-infoBg outline-dashed outline-cyan-950 shadow-none"
+                  className="my-4 w-full rounded-md py-2.5 bg-skin-createBg text-skin-primary hover:bg-skin-infoBg outline-dashed shadow-none"
                   disabled={false}
                 />
                 <Modal isOpen={showModal} onClose={toggleModal}>
@@ -120,7 +120,7 @@ function Profile() {
             </>
           )}
           <section>
-            <h2 className="my-5 text-5xl font-light text-skin-tagTextColor">Your Bookings</h2>
+            <h2 className="my-5 text-4xl font-regular mt-20 text-black">My Bookings</h2>
             {userBookings.map((booking) => (
               <BookingLi key={booking.id} booking={booking} onClick={() => handleClick(booking.venue.id)} />
             ))}

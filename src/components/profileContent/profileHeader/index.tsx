@@ -68,8 +68,8 @@ function ProfileHeader() {
           <ProfileBadge name={user.name} email={user.email} avatarUrl={user.avatar.url}/>
         </div>
         
-        <PrimaryButton onClick={handleButtonClick} className=" px-2.5 py-2.5 bg-skin-editBg absolute top-4 left-4" disabled={false}>
-          <FaCamera className='text-white' size={20} />
+        <PrimaryButton onClick={handleButtonClick} className=" px-2.5 py-2.5 bg-skin-createBg absolute top-4 left-4 border-transparent hover:border-2" disabled={false}>
+          <FaCamera className='text-skin-primary' size={20} />
         </PrimaryButton>
         <Modal isOpen={isModalOpen} onClose={handleButtonClick}>
           <article className="flex flex-col">

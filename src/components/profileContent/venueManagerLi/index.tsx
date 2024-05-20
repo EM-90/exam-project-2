@@ -8,38 +8,66 @@ interface VenueManagerLiProps {
   onEdit: () => void;
 }
 
-function VenueManagerLi({venue, onClick, onEdit, onDelete}) {
+
+function VenueManagerLi({ venue, onClick, onEdit, onDelete }) {
   return (
-    <article onClick={onClick} className=' cursor-pointer my-2 flex justify-between bg-skin-createBg p-5 rounded-md'>
-        <section className=' flex items-center gap-5'>
-        <div className='flex gap-2 items-center'>
-            <FaLocationDot className=' text-skin-tagTextColor' size={30} />
+    <article onClick={onClick} className="cursor-pointer flex justify-between border-b-2 p-5 hover:bg-skin-createBg">
+      <section className="flex flex-col sm:flex-row items-start gap-5 w-full">
+        <div className="flex-shrink-0">
+          <img
+            src={venue.media[0].url}
+            alt={venue.media[0].alt}
+            className="object-cover h-32 w-32 rounded-lg shadow-md"
+          />
+        </div>
+        <div className="flex-col gap-5">
+          <div className="flex gap-2">
             <div>
-              <h4 className='font-semibold text-skin-mutedText'>Location</h4>
-              <p className='text-skin-primary text-xl'>{venue.location.country}</p>
+              <h4 className="font-semibold text-skin-mutedText">Location</h4>
+              <p className="text-skin-primary text-xl">{venue.location.country}</p>
             </div>
+          </div>
+          <div className=''>
+            <h4 className="font-semibold text-skin-mutedText">Address</h4>
+            <p className="text-skin-primary text-xl">
+              <span>{venue.location.city}</span>, <span>{venue.location.address}</span>
+            </p>
+          </div>
+          <div className="self-start lg:self-end ">
+            <p className="text-skin-tagTextColor text-xl">
+              Bookings: <span className="font-medium">{venue._count.bookings}</span>
+            </p>
+          </div>
         </div>
-            
-        <div>
-            <h4 className='font-semibold text-skin-mutedText'>Address</h4>
-            <p className='text-skin-primary text-xl'><span>{venue.location.city}</span>, <span>{venue.location.address}</span></p>
+      </section>
+      <section className="flex xlg:flex-wrap gap-3 mt-5 lg:mt-0">
+        <div className='buttonContainer'>
+          <PrimaryButton
+            className="penIcon bg-skin-editBg hover:bg-skin-infoBg p-4 text-skin-primary"
+            disabled={false}
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit();
+            }}
+          >
+            <FaPen size={20} />
+          </PrimaryButton>
         </div>
-        <div className='text-md self-end px-5 border-x-2'>
-          <p className='text-skin-tagTextColor text-xl'>Bookings: <span className='font-medium'>{venue._count.bookings}</span></p>
+        <div className='buttonContainer'>
+          <PrimaryButton
+            className="trashIcon p-4 text-gray-500 hover:bg-gray-200"
+            disabled={false}
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete();
+            }}
+          >
+            <FaTrash size={20} />
+          </PrimaryButton>
         </div>
-           
-        </section>
-        <section className='flex gap-7'>
-            <PrimaryButton className='penIcon bg-skin-editBg hover:bg-skin-primary p-4 text-white' disabled={false}   onClick={(e) => {e.stopPropagation();onEdit();}}>
-             <FaPen size={20} />
-            </PrimaryButton>
-            <PrimaryButton className='trashIcon bg-red-400 p-4 text-white hover:bg-red-500 ' disabled={false} onClick={(e) => { e.stopPropagation(); onDelete(); }}>
-             <FaTrash size={20} />
-            </PrimaryButton>
-        </section>
-      
+      </section>
     </article>
-  )
+  );
 }
 
 export default VenueManagerLi;

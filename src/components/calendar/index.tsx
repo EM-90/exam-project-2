@@ -68,7 +68,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onSubmit, bookings })
         className="mt-2 p-2 border"
         placeholder="Number of Guests"
       />
-      <button type="submit" className="mt-2 p-2 bg-blue-500 text-white">Book Now</button>
+      <button type="submit" className="mt-2 p-2 bg-skin-primary text-white">Book Now</button>
     </form>
   );
 };
