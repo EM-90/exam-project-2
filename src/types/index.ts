@@ -47,7 +47,14 @@ export interface Venue {
     dateTo: string;
     guests: number;
     venueId: string;
-  
+    customer: {
+      name:string;
+      email:string;
+      avatar: {
+        url:string;
+        alt: string;
+      }   
+    }
   }
 
   export interface NewBooking {

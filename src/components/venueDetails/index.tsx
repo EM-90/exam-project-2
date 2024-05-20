@@ -91,9 +91,29 @@ const VenueDetails: React.FC = () => {
             />}
           </div>
         </div>
-        <div className="w-full">
-          <h3>Select your booking period</h3>
-          <DateRangePicker onSubmit={handleSubmit} bookings={bookings} />
+        <section className='h-96 overflow-auto bg-skin-createBg p-3 rounded-md'>
+            <h3 className="text-2xl text-skin-primary font-md mb-4 py-1">Users who have booked this venue</h3>
+            {bookings.map(booking => (
+              <div key={booking.id} className="shadow-md bg-white p-4 rounded mb-2">
+                <div className="flex flex-wrap items-start">
+                  <div className='flex flex-wrap w-full sm:flex-nowrap justify-between'>
+                    <div className="w-full sm:w-auto">
+                      <img src={booking.customer.avatar?.url} alt={booking.customer.avatar?.alt || 'User avatar'} className="w-12 h-12 rounded-full mr-4" />
+                      <p className="font-semibold">{booking.customer.name}</p>
+                      <p>{booking.customer.email}</p>
+                    </div>
+                    <div className='font-medium text-left sm:text-right text-lg w-full sm:w-auto mt-2 sm:mt-0'>
+                      <p>From: <span className='text-skin-primary pl-2'>{new Date(booking.dateFrom).toLocaleDateString()}</span></p>
+                      <p>To: <span className='text-skin-primary pl-2'>{new Date(booking.dateTo).toLocaleDateString()}</span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </section>
+          <div className="w-full">
+            <h3>Select your booking period</h3>
+            <DateRangePicker onSubmit={handleSubmit} bookings={bookings} />
         </div>
       </section>
     </article>
