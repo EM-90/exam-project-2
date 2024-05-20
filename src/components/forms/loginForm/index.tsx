@@ -1,22 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { useAuth } from '../../../context/authContext';
 
-function LoginForm({onRegisterClick}) {
+function LoginForm({ onRegisterClick }) {
+  const { login } = useAuth();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    const { login } = useAuth();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const email = e.currentTarget.email.value;
+    const password = e.currentTarget.password.value;
+    const error = await login(email, password);
+    if (error) {
+      setErrorMessage(error);
+    } else {
+      setErrorMessage(null); 
+    }
+  };
 
-    const handleSubmit = async (e: any) => {
-        e.preventDefault();
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        console.log("Email:", email, "Password:", password);
-        await login(email, password);
-      };
-
-    return (
-    <div className='container mx-auto my-7 px-7 min-h-screen flex flex-col justify-center items-center '>
+  return (
+    <div className='container  min-h-screen flex flex-col mt-40 items-center '>
       <h2 className="text-5xl font-light mb-10">Login</h2>
-      <form className='mb-40 w-1/2' onSubmit={handleSubmit}>
+      {errorMessage && (
+          <div className=" w-96 mb-4 p-2 font-medium text-red-600">
+            {errorMessage}
+          </div>
+        )}
+      <form className='mb-40 sm:w-96 md:w-96  lg:w-96' onSubmit={handleSubmit}>  
         <div className="mb-4">
           <label htmlFor="email" className="block mb-2">Email</label>
           <input
@@ -38,24 +47,19 @@ function LoginForm({onRegisterClick}) {
             autoComplete="current-password"
           />
         </div>
-        <div>
-        </div>
         <button
           type="submit"
           className="w-full py-2 bg-skin-createBg text-skin-primary hover:text-white rounded-md hover:bg-skin-primary border-skin-primary"
         >
           Login
         </button>
-        <button className="my-4 py-2" onClick={onRegisterClick}>Dont have an account? Create an account here</button>
+        <button className="my-4 py-2" onClick={onRegisterClick}>Don't have an account? Create an account here</button>
       </form>
     </div>
   );
 }
 
+export default LoginForm;
 
+//have to change the width of form 
 
-
- 
-
-
-export default LoginForm

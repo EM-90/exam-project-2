@@ -56,9 +56,9 @@ function RegisterForm({ onLoginClick }) {
     }
   };
   return (
-    <div className='container mx-auto my-7 px-7 min-h-screen flex flex-col justify-center items-center '>
+    <div className='container mx-auto my-7 min-h-screen flex flex-col mt-40 items-center '>
       <h2 className="text-5xl font-light mb-10">Register</h2>
-      <form className='mb-40 w-1/2' onSubmit={handleFormSubmit}>
+      <form className='mb-40  sm:w-96 md:w-96  lg:w-96' onSubmit={handleFormSubmit}>
         <div className='checkbox flex item-center my-7'>
           <input
             type='checkbox'
@@ -84,7 +84,7 @@ function RegisterForm({ onLoginClick }) {
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
             required
           />
-          {errors.name && <div style={{ color: 'red' }}>{errors.name}</div>}
+          {errors.name && <div className='w-96 mb-4 p-2 font-medium text-red-600'>{errors.name}</div>}
         </div>
         <div className="mb-4">
           <label htmlFor="email" className="block mb-2">Email</label>
@@ -98,7 +98,7 @@ function RegisterForm({ onLoginClick }) {
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
             required
           />
-          {errors.email && <div style={{ color: 'red' }}>{errors.email}</div>}
+          {errors.email && <div className='w-96 mb-4 p-2 font-medium text-red-600'>{errors.email}</div>}
         </div>
         <div className="mb-4">
           <label htmlFor="password" className="block mb-2">Password</label>
@@ -113,7 +113,7 @@ function RegisterForm({ onLoginClick }) {
             required
             autoComplete="current-password"
           />
-          {errors.password && <div style={{ color: 'red' }}>{errors.password}</div>}
+          {errors.password && <div className='w-96 mb-4 p-2 font-medium text-red-600'>{errors.password}</div>}
         </div>
         {successMessage && <div style={{ color: 'green' }}>{successMessage}</div>}
         <div>

@@ -8,7 +8,7 @@ interface AuthContextType {
     loading: boolean;
     error: string | null;
     setUser: (user: User) => void;
-    login: (email: string, password: string) => Promise<void>;
+    login: (email: string, password: string) => Promise<string | null>;
     logout: () => void;
     register: (name: string, email: string, password: string, venueManager: boolean) => Promise<void>;
     saveUserToLocalStorage: (user: User) => void;
@@ -54,7 +54,7 @@ export const AuthProvider: FunctionComponent<{ children: ReactNode }> = ({ child
     }, [user]);
 
 
-    const login = async (email: string, password: string) => {
+    const login = async (email: string, password: string):Promise<string | null> => {
         setLoading(true);
         setError(null);
         try {
@@ -62,16 +62,22 @@ export const AuthProvider: FunctionComponent<{ children: ReactNode }> = ({ child
             if (newUser && newUser.accessToken) {
                 setUser(newUser);
                 saveUserToLocalStorage(newUser);
+                return null; 
             } else {
                 throw new Error('Missing access token');
             }
         } catch (error) {
             console.error('Login failed:', error);
-            setError('Login failed. Please try again.');
+            if (error.response && error.response.data && error.response.data.errors) {
+                return error.response.data.errors[0].message;
+            } else {
+                return 'Login failed. Please try again.';
+            }
         } finally {
             setLoading(false);
         }
     };
+    
 
     const logout = () => {
         removeUserFromLocalStorage();
