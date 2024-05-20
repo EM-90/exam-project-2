@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useAuth } from '../../context/authContext'; // Import useAuth hook
 import DateRangePicker from '../calendar';
 import { FaCat, FaWifi, FaEgg, FaSquareParking } from 'react-icons/fa6';
 import { venueAPI } from '../../api/venue';
@@ -9,10 +10,11 @@ import { handleBookingSubmit } from '../../helpers/handlers';
 
 const VenueDetails: React.FC = () => {
   const { venueId } = useParams<{ venueId: string }>();
+  const navigate = useNavigate(); // Use useNavigate
+  const { user } = useAuth(); // Get the current user from the auth context
   const [venueData, setVenueData] = useState<Venue | null>(null);
   const [bookings, setBookings] = useState<Booking[]>([]);
-  let navigate = useNavigate();
-  
+
   useEffect(() => {
     const fetchVenueData = async () => {
       if (venueId) {
@@ -21,7 +23,7 @@ const VenueDetails: React.FC = () => {
           const response = await venueAPI.fetchVenueById(venueId, true, true);
           setVenueData(response.data.data);
           console.log("Venue Data:", response.data.data);
-          
+
           const { bookings } = response.data.data;
           if (bookings && bookings.length > 0) {
             setBookings(bookings);
@@ -47,6 +49,9 @@ const VenueDetails: React.FC = () => {
       alert("Venue ID is not available.");
     }
   };
+
+  const isVenueManager = user?.venueManager && user?.name === venueData?.owner?.name;
+  
 
   return (
     <article className="container mx-auto my-7 px-7">
@@ -91,14 +96,16 @@ const VenueDetails: React.FC = () => {
             />}
           </div>
         </div>
-        <section className='h-96 overflow-auto bg-skin-createBg p-3 rounded-md'>
-            <h3 className="text-2xl text-skin-primary font-md mb-4 py-1">Users who have booked this venue</h3>
+        <section className="w-full">
+            {isVenueManager && (
+          <section className=' mb-8 h-96 overflow-auto rounded-md'>
+            <h3 className="sticky top-0 z-40 text-2xl text-skin-primary bg-skin-createBg  font-md p-4">Your customers</h3>
             {bookings.map(booking => (
-              <div key={booking.id} className="shadow-md bg-white p-4 rounded mb-2">
-                <div className="flex flex-wrap items-start">
+              <div key={booking.id} className="shadow-md border bg-white p-4 rounded mb-2">
+                <div className="flex flex-wrap items-center">
+                  <img src={booking.customer.avatar?.url} alt={booking.customer.avatar?.alt || 'User avatar'} className="w-12 h-12 rounded-full mr-4" />
                   <div className='flex flex-wrap w-full sm:flex-nowrap justify-between'>
                     <div className="w-full sm:w-auto">
-                      <img src={booking.customer.avatar?.url} alt={booking.customer.avatar?.alt || 'User avatar'} className="w-12 h-12 rounded-full mr-4" />
                       <p className="font-semibold">{booking.customer.name}</p>
                       <p>{booking.customer.email}</p>
                     </div>
@@ -111,15 +118,19 @@ const VenueDetails: React.FC = () => {
               </div>
             ))}
           </section>
-          <div className="w-full">
-            <h3>Select your booking period</h3>
-            <DateRangePicker onSubmit={handleSubmit} bookings={bookings} />
-        </div>
+        )}
+          <h3>Select your booking period</h3>
+          <DateRangePicker onSubmit={handleSubmit} bookings={bookings} />
+        
+      
+        </section>
+   
       </section>
     </article>
   );
 };
 
 export default VenueDetails;
+
 
 
