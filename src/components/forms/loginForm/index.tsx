@@ -25,8 +25,8 @@ function LoginForm({ onRegisterClick }) {
           <ValidationError errorMessage={errorMessage}/>
         )}
       <form className='mb-40 sm:w-96 md:w-96  lg:w-96' onSubmit={handleSubmit}>  
-        <div className="mb-4">
-          <label htmlFor="email" className="block mb-2">Email</label>
+        <div className="mb-6">
+          <label htmlFor="email" className="block mb-2 font-medium">Email</label>
           <input
             type="email"
             id="email"
@@ -35,8 +35,8 @@ function LoginForm({ onRegisterClick }) {
             required
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block mb-2">Password</label>
+        <div className="mb-6">
+          <label htmlFor="password" className="block mb-2 font-medium">Password</label>
           <input
             type="password"
             id="password"
