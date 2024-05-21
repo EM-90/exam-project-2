@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../../context/authContext';
+import ValidationError from '../../messages/validationError';
 
 function LoginForm({ onRegisterClick }) {
   const { login } = useAuth();
@@ -21,9 +22,7 @@ function LoginForm({ onRegisterClick }) {
     <div className='container  min-h-screen flex flex-col mt-40 items-center '>
       <h2 className="text-5xl font-light mb-10">Login</h2>
       {errorMessage && (
-          <div className=" w-96 mb-4 p-2 font-medium text-red-600">
-            {errorMessage}
-          </div>
+          <ValidationError errorMessage={errorMessage}/>
         )}
       <form className='mb-40 sm:w-96 md:w-96  lg:w-96' onSubmit={handleSubmit}>  
         <div className="mb-4">

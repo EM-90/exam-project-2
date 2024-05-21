@@ -45,7 +45,7 @@ function Profile() {
       await handleUpdate(event, selectedVenueId, formData);
     } else {
       await handleCreate(event, formData, (newVenue) => {
-        setVenues((prevVenues) => [newVenue, ...prevVenues]); 
+        setVenues((prevVenues) => [newVenue, ...prevVenues]);
         closeModal();
       });
     }
@@ -140,6 +140,7 @@ function Profile() {
 }
 
 export default Profile;
+
 
 
 

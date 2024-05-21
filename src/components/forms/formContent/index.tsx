@@ -14,9 +14,9 @@ export const TextInput = ({ name, value, onChange, placeholder, type = 'text', r
 );
 
  export const Checkbox = ({ name, checked, onChange, label }) => (
-    <label>
+    <label className='flex items-center gap-1'>
         <input
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
+            className="w-5 h-5 rounded border border-gray-300 cursor-pointer focus:outline-none focus:border-skin-primary"
             type="checkbox"
             name={name}
             checked={checked}

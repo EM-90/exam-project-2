@@ -18,10 +18,11 @@ const initialFormData: Venue = {
         address: '',
         city: '',
         country: ''
-    }
+    },
+    bookings: []
 };
 
-const useVenueForm = (venueId: string | null): [Venue, (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void, () => void] => {
+const useVenueForm = (venueId: string | null): [Venue, (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void, () => void] => {
     const [formData, setFormData] = useState<Venue>(initialFormData);
 
     useEffect(() => {
@@ -42,7 +43,7 @@ const useVenueForm = (venueId: string | null): [Venue, (event: React.ChangeEvent
         }
     }, [venueId]);
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value, type } = event.target;
 
         setFormData(prevFormData => {
@@ -58,6 +59,8 @@ const useVenueForm = (venueId: string | null): [Venue, (event: React.ChangeEvent
                 newFormData.location = { ...newFormData.location, [field]: value };
             } else if (type === 'checkbox' && event.target instanceof HTMLInputElement) {
                 newFormData.meta[name] = event.target.checked;
+            } else if (name === 'maxGuests') {
+                newFormData.maxGuests = parseInt(value, 10);
             } else {
                 newFormData[name] = type === 'number' ? parseInt(value, 10) : value;
             }
@@ -72,6 +75,8 @@ const useVenueForm = (venueId: string | null): [Venue, (event: React.ChangeEvent
 };
 
 export default useVenueForm;
+
+
 
 
 

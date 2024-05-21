@@ -1,6 +1,8 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useAuth } from '../../../context/authContext'; 
 import validateEmail from '../../../utils/validataEmail';
+import ValidationError from '../../messages/validationError';
+import ValidationSuccess from '../../messages/validationSuccess';
 
 
 function RegisterForm({ onLoginClick }) {
@@ -84,7 +86,7 @@ function RegisterForm({ onLoginClick }) {
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
             required
           />
-          {errors.name && <div className='w-96 mb-4 p-2 font-medium text-red-600'>{errors.name}</div>}
+          {errors.name && <ValidationError errorMessage={errors.name}/>}
         </div>
         <div className="mb-4">
           <label htmlFor="email" className="block mb-2">Email</label>
@@ -98,7 +100,7 @@ function RegisterForm({ onLoginClick }) {
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
             required
           />
-          {errors.email && <div className='w-96 mb-4 p-2 font-medium text-red-600'>{errors.email}</div>}
+          {errors.email && <ValidationError errorMessage={errors.email}/>}
         </div>
         <div className="mb-4">
           <label htmlFor="password" className="block mb-2">Password</label>
@@ -113,9 +115,9 @@ function RegisterForm({ onLoginClick }) {
             required
             autoComplete="current-password"
           />
-          {errors.password && <div className='w-96 mb-4 p-2 font-medium text-red-600'>{errors.password}</div>}
+          {errors.password && <ValidationError errorMessage={errors.password}/>}
         </div>
-        {successMessage && <div style={{ color: 'green' }}>{successMessage}</div>}
+        {successMessage && <ValidationSuccess successMessage={successMessage}/>}
         <div>
         </div>
         <button
