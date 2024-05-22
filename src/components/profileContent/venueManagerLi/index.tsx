@@ -1,8 +1,9 @@
 import React from 'react';
 import { FaPen, FaTrash } from 'react-icons/fa';
 import PrimaryButton from '../../buttons/primaryButton';
+import UpdateMessage from '../../messages/updateMessage';
 
-function VenueManagerLi({ venue, onClick, onEdit, onDelete }) {
+function VenueManagerLi({ venue, onClick, onEdit, onDelete, updateMessage, showUpdateMessage }) {
   return (
     <article
       onClick={onClick}
@@ -57,10 +58,12 @@ function VenueManagerLi({ venue, onClick, onEdit, onDelete }) {
           <FaTrash size={20} />
         </PrimaryButton>
       </div>
+        {showUpdateMessage && <UpdateMessage updateMessage={updateMessage}/>}  
     </article>
   );
 }
 
 export default VenueManagerLi;
+
 
 

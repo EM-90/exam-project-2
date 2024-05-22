@@ -9,7 +9,6 @@ export const handleUpdate = async (event: FormEvent, venueId: string, formData: 
     event.preventDefault();
     try {
         const response = await venueAPI.updateVenue(venueId, formData);
-        alert('Venue updated successfully!');
         console.log(response);
     } catch (error) {
         console.error('Failed to update venue:', error);
@@ -38,6 +37,7 @@ export const handleDelete = async (id: string, setVenues: React.Dispatch<React.S
         console.error('Failed to delete venue:', error);
     }
 };
+
 
 
 export const handleBookingSubmit = async ( venueId: string, bookingData: { dateFrom: Date; dateTo: Date; guests: number }, navigate: ReturnType<typeof useNavigate>) => {

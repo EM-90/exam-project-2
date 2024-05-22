@@ -48,7 +48,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onSubmit, bookings })
   };
 
   return (
-    <form className="flex flex-col" onSubmit={handleSubmit}>
+    <form className="" onSubmit={handleSubmit}>
       <div className='calendar-container'>
         <DatePicker
           selectsRange={true}
@@ -56,7 +56,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onSubmit, bookings })
           endDate={endDate}
           onChange={update => setDateRange(update as [Date | null, Date | null])}
           className="w-full border p-2"
-          withPortal
+          inline
           dayClassName={dayClassName}
         />
       </div>
@@ -65,10 +65,10 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onSubmit, bookings })
         value={guests}
         onChange={(e) => setGuests(parseInt(e.target.value))}
         min="1"
-        className="mt-2 p-2 border"
+        className="mt-2 w-36 p-2 border"
         placeholder="Number of Guests"
       />
-      <button type="submit" className="mt-2 p-2 bg-skin-primary text-white">Book Now</button>
+      <button type="submit" className="mt-2 ml-2 p-2 bg-skin-primary text-white">Book Now</button>
     </form>
   );
 };

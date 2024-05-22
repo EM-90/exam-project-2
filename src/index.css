@@ -7,6 +7,10 @@
   .fade-out-bg {
     @apply animate-fadeOutBackground;
   }
+
+  .update-pulse-bg {
+    @apply animate-pulseBackground;
+  }
  
 :root {
   /* Primary Colors */

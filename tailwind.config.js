@@ -35,13 +35,19 @@ export default {
         }
       },
       keyframes: {
-        fadeOutBackground: {
-          '0%': { backgroundColor: 'rgba(144, 238, 144, 1)' },
-          '100%': { backgroundColor: 'rgba(144, 238, 144, 0)' },
+        pulseBackground: {
+          '0%, 100%': {
+            backgroundColor: 'rgba(191, 219, 254, 1)',
+            boxShadow: '0 0 5px rgba(37, 99, 235, 0.5)', 
+          },
+          '50%': {
+            backgroundColor: 'rgba(147, 197, 253, 1)', 
+            boxShadow: '0 0 20px rgba(37, 99, 235, 1)',
+          },
         },
       },
       animation: {
-        fadeOutBackground: 'fadeOutBackground 2s forwards',
+        pulseBackground: 'pulseBackground 2s ease-in-out infinite',
       },
     },
   },
