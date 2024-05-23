@@ -52,7 +52,7 @@ function LoginForm({ onRegisterClick }) {
         >
           Login
         </button>
-        <button className="my-4 py-2" onClick={onRegisterClick}>Don't have an account? Create an account here</button>
+        <button className="my-4  text-center underline text-blue-900 font-medium" onClick={onRegisterClick}>Don't have an account? Register here</button>
       </form>
     </div>
   );

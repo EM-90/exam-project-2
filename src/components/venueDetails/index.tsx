@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate
-import { useAuth } from '../../context/authContext'; // Import useAuth hook
+import { useParams, useNavigate } from 'react-router-dom'; 
+import { useAuth } from '../../context/authContext';
 import DateRangePicker from '../calendar';
 import { FaCat, FaWifi, FaEgg, FaSquareParking } from 'react-icons/fa6';
 import { venueAPI } from '../../api/venue';
@@ -10,8 +10,8 @@ import { handleBookingSubmit } from '../../helpers/handlers';
 
 const VenueDetails: React.FC = () => {
   const { venueId } = useParams<{ venueId: string }>();
-  const navigate = useNavigate(); // Use useNavigate
-  const { user } = useAuth(); // Get the current user from the auth context
+  const navigate = useNavigate(); 
+  const { user } = useAuth(); 
   const [venueData, setVenueData] = useState<Venue | null>(null);
   const [bookings, setBookings] = useState<Booking[]>([]);
 
@@ -51,7 +51,7 @@ const VenueDetails: React.FC = () => {
   };
 
   const isVenueManager = user?.venueManager && user?.name === venueData?.owner?.name;
-  
+
 
   return (
     <article className="container mx-auto my-7 px-7">
@@ -119,7 +119,7 @@ const VenueDetails: React.FC = () => {
             ))}
           </section>
         )}
-          <h3>Select your booking period</h3>
+          <h3 className='text-2xl font-medium pb-2'>Select your booking period</h3>
           <DateRangePicker onSubmit={handleSubmit} bookings={bookings} />
         
       
