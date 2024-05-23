@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import useVenueForm from "../../hooks/useVenueForm";
 import { handleCreate, handleUpdate, handleDelete } from "../../helpers/handlers";
 import BookingLi from "../../components/profileContent/bookingLi";
-import UpdateMessage from "../../components/messages/updateMessage";
+
 
 function Profile() {
   const { user } = useAuth();
@@ -23,8 +23,9 @@ function Profile() {
   const [venues, setVenues] = useState([]);
   const [userBookings, setUserBookings] = useState([]);
   const [formData, handleChange, resetFormData] = useVenueForm(selectedVenueId);
-  const [updateMessage, setUpdateMessage] = useState('');
-  const [showUpdateMessage, setShowUpdateMessage] = useState(false);
+  const [feedbackMessage, setFeedbackMessage] = useState('');
+  const [showFeedbackMessage, setShowFeedbackMessage] = useState(false);
+  const [isSuccessMessage, setIsSuccessMessage] = useState(false);
   const [updatedVenueId, setUpdatedVenueId] = useState(null);
   const navigate = useNavigate();
 
@@ -47,18 +48,20 @@ function Profile() {
     event.preventDefault();
     if (selectedVenueId) {
       await handleUpdate(event, selectedVenueId, formData);
-      setUpdateMessage('Updated');
-      setShowUpdateMessage(true);
+      setFeedbackMessage('Updated');
+      setIsSuccessMessage(false);
+      setShowFeedbackMessage(true);
       setUpdatedVenueId(selectedVenueId);
-      setTimeout(() => setShowUpdateMessage(false), 3000);
+      setTimeout(() => setShowFeedbackMessage(false), 1000);
       closeModal();
     } else {
       await handleCreate(event, formData, (newVenue) => {
         setVenues((prevVenues) => [newVenue, ...prevVenues]);
-        setUpdateMessage('Venue created successfully');
-        setShowUpdateMessage(true);
+        setFeedbackMessage('New');
+        setIsSuccessMessage(true);
+        setShowFeedbackMessage(true);
         setUpdatedVenueId(newVenue.id);
-        setTimeout(() => setShowUpdateMessage(false), 3000);
+        setTimeout(() => setShowFeedbackMessage(false), 1000);
         closeModal();
       });
     }
@@ -127,8 +130,9 @@ function Profile() {
                     onClick={() => handleClick(venue.id)}
                     onEdit={() => openModal(venue.id)}
                     onDelete={() => handleDelete(venue.id, setVenues, venues)}
-                    updateMessage={updateMessage}
-                    showUpdateMessage={showUpdateMessage && updatedVenueId === venue.id}
+                    feedbackMessage={feedbackMessage}
+                    showFeedbackMessage={showFeedbackMessage && updatedVenueId === venue.id}
+                    isSuccessMessage={isSuccessMessage}
                   />
                 ))}
               </section>

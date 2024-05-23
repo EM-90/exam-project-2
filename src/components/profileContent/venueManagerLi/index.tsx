@@ -1,9 +1,12 @@
 import React from 'react';
 import { FaPen, FaTrash } from 'react-icons/fa';
 import PrimaryButton from '../../buttons/primaryButton';
-import UpdateMessage from '../../messages/updateMessage';
+import FeedbackMessage from '../../messages/feedbackMessage';
 
-function VenueManagerLi({ venue, onClick, onEdit, onDelete, updateMessage, showUpdateMessage }) {
+
+function VenueManagerLi({ venue, onClick, onEdit, onDelete, feedbackMessage, showFeedbackMessage, isSuccessMessage }) {
+  const messageClassName = isSuccessMessage ? 'bg-green-200 text-green-600' : 'bg-blue-200 text-blue-600';
+  
   return (
     <article
       onClick={onClick}
@@ -24,7 +27,7 @@ function VenueManagerLi({ venue, onClick, onEdit, onDelete, updateMessage, showU
                 onEdit();
               }}
             >
-              <FaPen size={20} />
+              <FaPen size={26} />
             </PrimaryButton>
           </div>
           <div className="flex flex-col gap-2">
@@ -46,6 +49,7 @@ function VenueManagerLi({ venue, onClick, onEdit, onDelete, updateMessage, showU
           </div>
         </div>
       </section>
+      {showFeedbackMessage && <FeedbackMessage feedbackMessage={feedbackMessage} className={messageClassName} />}
       <div className="flex justify-center sm:flex-col gap-2 mt-4 sm:mt-0 sm:ml-auto">
         <PrimaryButton
           className="trashIcon p-4 text-gray-500 hover:bg-gray-200"
@@ -58,12 +62,12 @@ function VenueManagerLi({ venue, onClick, onEdit, onDelete, updateMessage, showU
           <FaTrash size={20} />
         </PrimaryButton>
       </div>
-        {showUpdateMessage && <UpdateMessage updateMessage={updateMessage}/>}  
     </article>
   );
 }
 
 export default VenueManagerLi;
+
 
 
 
