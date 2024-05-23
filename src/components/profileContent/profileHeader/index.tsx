@@ -72,7 +72,7 @@ function ProfileHeader() {
           <FaCamera className='text-skin-primary' size={20} />
         </PrimaryButton>
         <Modal isOpen={isModalOpen} onClose={handleButtonClick}>
-          <article className="flex flex-col">
+          <article className="p-5 flex flex-col">
             <h4 className="text-lg font-bold text-skin-primary">Edit avatar/banner</h4>
             <div className="my-7">
               <label htmlFor="avatar">Edit avatar</label>
@@ -96,7 +96,7 @@ function ProfileHeader() {
                 onChange={handleBannerChange}
               />
             </div>
-            <PrimaryButton onClick={handleUpdate} className="pl-5 flex flex-row-reverse items-center justify-between px-2.5 py-2.5 top-4 left-4 bg-skin-editBg text-white" disabled={false} text="Update">
+            <PrimaryButton onClick={handleUpdate} className="pl-5 pr-5 flex items-center gap-3 px-2.5 py-2.5 top-4 left-4 bg-skin-infoBg hover:bg-skin-primary hover:text-white text-skin-primary" disabled={false} text="Update">
               <FaCircleCheck size={24} />
             </PrimaryButton>
           </article>

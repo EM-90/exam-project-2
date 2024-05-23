@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import useVenueForm from "../../hooks/useVenueForm";
 import { handleCreate, handleUpdate, handleDelete } from "../../helpers/handlers";
 import BookingLi from "../../components/profileContent/bookingLi";
+import { FaPlus } from "react-icons/fa6";
 
 function Profile() {
   const { user } = useAuth();
@@ -118,12 +119,12 @@ function Profile() {
             <>
               <section>
                 <h2 className="my-5 text-4xl font-regular mt-10 text-black">My Venues</h2>
-                <PrimaryButton
-                  text="Add Venue"
-                  onClick={() => openModal(null)}
-                  className="my-4 w-full rounded-md py-2.5 bg-skin-createBg text-skin-primary hover:bg-skin-infoBg outline-dashed shadow-none"
-                  disabled={false}
-                />
+                <PrimaryButton 
+                 onClick={() => openModal(null)}
+                 className=" flex items-center gap-4 rounded-full shadow-lg py-2.5 px-5 mb-10 mt-5 bg-skin-infoBg text-skin-primary hover:bg-skin-primary hover:text-white text-lg"
+                 disabled={false}>
+                  <p>Add venue</p><FaPlus size={28}/>
+                </PrimaryButton>
                 <Modal isOpen={showModal} onClose={toggleModal}>
                   <VenueForm
                     handleSubmit={handleSubmit}
