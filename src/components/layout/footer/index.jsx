@@ -2,8 +2,8 @@ import { FaInstagram, FaFacebook, FaTiktok } from "react-icons/fa";
 
 function Footer() {
   return (
-    <div className="w-full flex justify-center items-center h-40 bg-skin-infoBg">
-        <div className="container flex justify-between items-center">
+    <div className="pl-2 w-full flex justify-center items-center h-40 bg-skin-infoBg">
+        <div className="container flex justify-between items-center flex-wrap">
             <div className="soMe-container flex flex-col justify-center gap-2">
                 <div className="flex gap-2">
                     <FaInstagram className="h-8 w-8" />

@@ -92,7 +92,7 @@ function Navbar() {
                 </li>
               )}
               <li>
-                <Link to="/profile">
+                <Link to="/profile" onClick={closeMenu} >
                   <HiOutlineUserCircle className="h-10 w-10 text-white hover:font-bold" />
                 </Link>
               </li>

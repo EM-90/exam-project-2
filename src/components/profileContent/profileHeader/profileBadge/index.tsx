@@ -26,13 +26,13 @@ function ProfileBadge({ name, email, avatarUrl, avatarAlt, owner }: ProfileBadge
     }
 
     return (
-        <section className='avatarSection flex flex-wrap '>
+        <section className='avatarSection flex flex-wrap items-center text-wrap '>
             {avatarUrl && (
                 <img className='rounded-full object-cover w-28 h-28' src={avatarUrl} alt={avatarAlt || "User Avatar"} />
             )}
-            <section className='nameAndContactInfo px-4 py-2 ml-2 rounded-md bg-white'>
+            <section className='nameAndContactInfo px-2 py-1 sm:ml-2 rounded-md h-20 bg-white'>
                 {name && <h1 className='text-2xl font-semibold'>{name}</h1>}
-                {email && <p>{email}</p>}
+                {email && <p className="text-wrap">{email}</p>}
                 {owner?.bio &&  
                 <section className="mt-5">
                     <h4 className="font-bold">About</h4>
