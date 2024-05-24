@@ -51,6 +51,7 @@ const VenueDetails: React.FC = () => {
   };
 
   const isVenueManager = user?.venueManager && user?.name === venueData?.owner?.name;
+  const isOwner = !!(user && user.name === venueData?.owner?.name);
 
 
   return (
@@ -120,7 +121,7 @@ const VenueDetails: React.FC = () => {
           </section>
         )}
           <h3 className='text-2xl font-medium pb-2'>Select your booking period</h3>
-          <DateRangePicker onSubmit={handleSubmit} bookings={bookings} />
+          <DateRangePicker onSubmit={handleSubmit} bookings={bookings} pricePerNight={venueData.price} isOwner={isOwner} />
         
       
         </section>

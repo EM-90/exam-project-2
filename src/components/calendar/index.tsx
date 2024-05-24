@@ -1,26 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Booking } from '../../types';
 import PrimaryButton from '../buttons/primaryButton';
 import { useAuth } from '../../context/authContext';
 import { Link } from 'react-router-dom';
+import { PriceCalculator } from '../priceCalculator';
 
 interface DateRangePickerProps {
-  onSubmit: (bookingData: { dateFrom: Date; dateTo: Date; guests: number }) => void;
+  onSubmit: (bookingData: { dateFrom: Date; dateTo: Date; guests: number, totalPrice: number }) => void;
   bookings: Booking[];
+  pricePerNight: number;
+  isOwner: boolean;
 }
 
-const DateRangePicker: React.FC<DateRangePickerProps> = ({ onSubmit, bookings }) => {
+const DateRangePicker: React.FC<DateRangePickerProps> = ({ onSubmit, bookings, pricePerNight, isOwner }) => {
   const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([null, null]);
   const [startDate, endDate] = dateRange;
   const [guests, setGuests] = useState<number>(1);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [numberOfNights, setNumberOfNights] = useState<number>(0);
   const { user } = useAuth();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (startDate && endDate && guests > 0) {
-      onSubmit({ dateFrom: startDate, dateTo: endDate, guests });
+      onSubmit({ dateFrom: startDate, dateTo: endDate, guests, totalPrice });
     } else {
       alert("Please select valid dates and number of guests.");
     }
@@ -64,9 +69,21 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onSubmit, bookings })
     }
     const isBookedDate = isBooked(date);
     const className = isBookedDate ? 'line-through rounded-md text-white text-lg' : 'bg-green-100 rounded-md text-lg';
-    console.log(`Date ${date.toDateString()} is ${isBookedDate ? "booked" : "available"}, class: ${className}`);
     return className;
   };
+
+  useEffect(() => {
+    if (startDate && endDate) {
+      const calculatedPrice = PriceCalculator(startDate, endDate, pricePerNight, getDatesInRange);
+      setTotalPrice(calculatedPrice);
+
+      const nights = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
+      setNumberOfNights(nights);
+    } else {
+      setTotalPrice(0);
+      setNumberOfNights(0);
+    }
+  }, [startDate, endDate, pricePerNight]);
 
   return (
     <form className="flex justify-between bg-skin-infoBg p-3" onSubmit={handleSubmit}>
@@ -83,23 +100,27 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onSubmit, bookings })
           minDate={new Date()}
         />
       </div>
-      <label className='ml-4 w-full flex flex-col' htmlFor="guests">Guests
-        <input
-          type="number"
-          id="guests"
-          value={guests}
-          onChange={(e) => setGuests(parseInt(e.target.value))}
-          min="1"
-          max="4"
-          className="mt-2 p-2 border"
-          placeholder="Number of Guests"
-        />
-        <PrimaryButton disabled={!user?.accessToken} type="submit" className="mt-2 p-2 bg-skin-primary text-white">
-          Book Now
-        </PrimaryButton>
-        <p className='text-center pt-1'>You have to be a registered customer to book a venue</p>
-        <Link className='text-center underline text-blue-900 font-medium' to='/profile'>Click here to register</Link>
-      </label>
+      {!isOwner && (
+        <label className='ml-4 w-full flex flex-col' htmlFor="guests">Guests
+          <input
+            type="number"
+            id="guests"
+            value={guests}
+            onChange={(e) => setGuests(parseInt(e.target.value))}
+            min="1"
+            max="4"
+            className="mt-2 p-2 border"
+            placeholder="Number of Guests"
+          />
+          <p className='text-lg font-medium'>Number of Nights: <span className='font-bold text-skin-primary'>{numberOfNights}</span></p>
+          <p className='text-lg font-medium'>Total Price: <span className='font-bold text-skin-primary'>${totalPrice.toFixed(2)}</span></p>
+          <PrimaryButton disabled={!user?.accessToken} type="submit" className="mt-2 p-2 bg-skin-primary text-white">
+            Book Now
+          </PrimaryButton>
+          <p className='text-center pt-1'>You have to be a registered customer to book a venue</p>
+          <Link className='text-center underline text-blue-900 font-medium' to='/profile'>Click here to register</Link>
+        </label>
+      )}
     </form>
   );
 };
