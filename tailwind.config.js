@@ -17,6 +17,11 @@ export default {
           mutedText: 'var(--gray-text)',
         }
       },
+
+      screens: {
+        'xs': '390',
+      },
+
       backgroundColor: {
         skin: {
           primary: 'var(--primary-color)',

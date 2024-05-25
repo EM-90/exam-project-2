@@ -168,12 +168,12 @@ function Profile() {
       )}
       {showConfirmModal && (
         <Modal isOpen={showConfirmModal} onClose={() => setShowConfirmModal(false)}>
-          <div className="p-4">
+          <div className="p-4 sm:flex flex-col">
             <h2 className="text-xl font-bold mb-4 text-skin-primary">Confirm Delete</h2>
             <p>Are you sure you want to delete this venue?</p>
-            <div className="flex gap-7 justify-end mt-4">
-              <PrimaryButton onClick={confirmDelete} className="bg-red-500 hover:bg-red-600 px-7 py-2 text-white">Delete</PrimaryButton>
-              <PrimaryButton onClick={() => setShowConfirmModal(false)} className="mr-2 px-7 py-2 border hover:bg-gray-200">Cancel</PrimaryButton>
+            <div className="flex gap-4 justify-start sm:justify-between mt-4">
+              <PrimaryButton onClick={confirmDelete} className="bg-red-500 hover:bg-red-600 px-2 sm:px-7 sm:py-2 text-white">Delete</PrimaryButton>
+              <PrimaryButton onClick={() => setShowConfirmModal(false)} className=" px-2 py-1 sm:px-7 sm:py-2 bg-gray-100 hover:bg-gray-200">Cancel</PrimaryButton>
             </div>
           </div>
         </Modal>

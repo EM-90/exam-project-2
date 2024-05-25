@@ -86,7 +86,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onSubmit, bookings, p
   }, [startDate, endDate, pricePerNight]);
 
   return (
-    <form className="flex justify-between bg-skin-infoBg p-3" onSubmit={handleSubmit}>
+    <form className=" gap-3 flex flex-wrap md:flex-wrap sm:flex-nowrap lg:flex-nowrap justify-between bg-none sm:bg-skin-infoBg p-3" onSubmit={handleSubmit}>
       <div className='calendar-container'>
         <DatePicker
           selectsRange={true}
@@ -101,7 +101,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onSubmit, bookings, p
         />
       </div>
       {!isOwner && (
-        <label className='ml-4 w-full flex flex-col' htmlFor="guests">Guests
+        <label className='lg:ml-2 w-full flex flex-col' htmlFor="guests">Guests
           <input
             type="number"
             id="guests"

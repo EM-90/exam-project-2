@@ -20,7 +20,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     }, [isOpen]);
 
     return (
-        <dialog ref={dialogRef} className="modal rounded-md p-6 " onClick={() => onClose()}>
+        <dialog ref={dialogRef} className="modal rounded-md sm:p-6 " onClick={() => onClose()}>
             <article onClick={e => e.stopPropagation()}> 
                 {children}
             </article>

@@ -26,7 +26,7 @@ function ProfileBadge({ name, email, avatarUrl, avatarAlt, owner }: ProfileBadge
     }
 
     return (
-        <section className='avatarSection flex flex-wrap items-center text-wrap '>
+        <section className='avatarSection flex flex-wrap items-center '>
             {avatarUrl && (
                 <img className='rounded-full object-cover w-28 h-28' src={avatarUrl} alt={avatarAlt || "User Avatar"} />
             )}

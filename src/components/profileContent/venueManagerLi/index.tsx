@@ -10,14 +10,14 @@ function VenueManagerLi({ venue, onClick, onEdit, onDelete, feedbackMessage, sho
   return (
     <article
       onClick={onClick}
-      className="cursor-pointer flex flex-col sm:flex-row border-b-2 p-5 hover:bg-skin-createBg">
+      className="h-full cursor-pointer flex flex-col sm:flex-row border-b-2 p-5 hover:bg-skin-createBg">
       <section className="flex flex-col sm:flex-row items-start gap-5 w-full">
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
-          <div className="relative w-full sm:w-auto">
+        <div className="h-full w-full flex flex-col sm:flex-row gap-4">
+          <div className="relative h-full">
             <img
               src={venue.media[0].url}
               alt={venue.media[0].alt}
-              className="object-cover w-full sm:w-44 h-32 rounded-lg shadow-md"
+              className=" w-full object-cover max-h-60 sm:min-h-32 sm:max-h-32 sm:min-w-44 sm:max-w-44 rounded-lg shadow-md"
             />
             <PrimaryButton
               className="absolute top-1 left-1 bg-skin-infoBg p-2 hover:bg-skin-primary hover:text-white text-skin-primary"
@@ -50,7 +50,7 @@ function VenueManagerLi({ venue, onClick, onEdit, onDelete, feedbackMessage, sho
         </div>
       </section>
       {showFeedbackMessage && <FeedbackMessage feedbackMessage={feedbackMessage} className={messageClassName} />}
-      <div className="flex justify-center sm:flex-col gap-2 mt-4 sm:mt-0 sm:ml-auto">
+      <div className="flex justify-start sm:justify-center sm:flex-col gap-2 mt-4 sm:mt-0 sm:ml-auto">
         <PrimaryButton
           className="trashIcon p-4 text-gray-500 hover:bg-gray-200"
           disabled={false}

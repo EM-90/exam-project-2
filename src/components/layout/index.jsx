@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 
 function Layout() {
   return (
-    <div className="flex flex-col min-h-screen"> 
+    <div className=" flex flex-col min-h-screen"> 
       <header className="sticky top-0 z-50">
         <Navbar />
       </header>
