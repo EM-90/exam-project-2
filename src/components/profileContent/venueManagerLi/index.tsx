@@ -3,8 +3,26 @@ import { FaPen, FaTrash } from 'react-icons/fa';
 import PrimaryButton from '../../buttons/primaryButton';
 import FeedbackMessage from '../../messages/feedbackMessage';
 
+interface VenueManagerLiProps {
+  venue: any; 
+  onClick: () => void;
+  onEdit: () => void;
+  onDelete: () => void;
+  feedbackMessage: string;
+  showFeedbackMessage: boolean;
+  isSuccessMessage: boolean;
+}
 
-function VenueManagerLi({ venue, onClick, onEdit, onDelete, feedbackMessage, showFeedbackMessage, isSuccessMessage }) {
+
+const VenueManagerLi: React.FC<VenueManagerLiProps> = ({
+  venue,
+  onClick,
+  onEdit,
+  onDelete,
+  feedbackMessage,
+  showFeedbackMessage,
+  isSuccessMessage,
+}) => {
   const messageClassName = isSuccessMessage ? 'bg-green-200 text-green-600' : 'bg-blue-200 text-blue-600';
   
   return (

@@ -4,9 +4,13 @@ import validateEmail from '../../../utils/validataEmail';
 import ValidationError from '../../messages/validationError';
 import ValidationSuccess from '../../messages/validationSuccess';
 
+interface RegisterFormProps {
+  onLoginClick: () => void;
+}
 
-function RegisterForm({ onLoginClick }) {
-  const { register } = useAuth();  // Using register from context
+
+const RegisterForm: React.FC<RegisterFormProps> = ({ onLoginClick }) => {
+  const { register } = useAuth(); 
   const [errors, setErrors] = useState<{ [key: string]: string }>({
     name: '',
     email: '',

@@ -66,7 +66,7 @@ export const AuthProvider: FunctionComponent<{ children: ReactNode }> = ({ child
             } else {
                 throw new Error('Missing access token');
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error('Login failed:', error);
             if (error.response && error.response.data && error.response.data.errors) {
                 return error.response.data.errors[0].message;

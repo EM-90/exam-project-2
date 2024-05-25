@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { useAuth } from '../../../context/authContext';
 import ValidationError from '../../messages/validationError';
 
-function LoginForm({ onRegisterClick }) {
+interface LoginFormProps {
+  onRegisterClick: () => void;
+}
+
+const LoginForm: React.FC<LoginFormProps> = ({ onRegisterClick }) => {
   const { login } = useAuth();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 

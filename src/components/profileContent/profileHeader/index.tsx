@@ -37,11 +37,11 @@ function ProfileHeader() {
     setModalOpen(!isModalOpen);
   };
 
-  const handleAvatarChange = (e) => {
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAvatar(e.target.value);
   };
 
-  const handleBannerChange = (e) => {
+  const handleBannerChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBanner(e.target.value);
   };
 
@@ -64,7 +64,7 @@ function ProfileHeader() {
     <div className='my-7'> 
       <article className="profile-header relative">
         <img className='w-full h-60 sm:object-cover sm:rounded-md' src={user.banner.url} alt={user.banner.alt} />
-        <div className='absolute avatarSection flex flex-wrap items-center top-6 left-2 sm:left-6'>
+        <div className='absolute avatarSection flex flex-wrap items-center top-6 left-e: React.ChangeEvent<HTMLInputElement> sm:left-6'>
           <ProfileBadge name={user.name} email={user.email} avatarUrl={user.avatar.url}/>
         </div>
         
