@@ -53,16 +53,18 @@ const useVenueForm = (venueId: string | null): [Venue, (event: React.ChangeEvent
                 const [_, index, field] = name.split('.');
                 if (!newFormData.media) newFormData.media = [];
                 if (!newFormData.media[+index]) newFormData.media[+index] = { url: '', alt: '' };
-                newFormData.media[+index][field] = value;
+                newFormData.media[+index] = { ...newFormData.media[+index], [field]: value };
             } else if (name.startsWith('location.')) {
                 const field = name.split('.')[1];
-                newFormData.location = { ...newFormData.location, [field]: value };
-            } else if (type === 'checkbox' && event.target instanceof HTMLInputElement) {
-                newFormData.meta[name] = event.target.checked;
+                if (['address', 'city', 'country'].includes(field)) {
+                    newFormData.location = { ...newFormData.location, [field]: value };
+                }
+            } else if (name in newFormData.meta && event.target instanceof HTMLInputElement && type === 'checkbox') {
+                newFormData.meta[name as keyof Venue['meta']] = event.target.checked;
             } else if (name === 'maxGuests') {
                 newFormData.maxGuests = parseInt(value, 10);
             } else {
-                newFormData[name] = type === 'number' ? parseInt(value, 10) : value;
+                (newFormData as any)[name] = type === 'number' ? parseInt(value, 10) : value;
             }
 
             return newFormData;
@@ -75,6 +77,9 @@ const useVenueForm = (venueId: string | null): [Venue, (event: React.ChangeEvent
 };
 
 export default useVenueForm;
+
+
+
 
 
 

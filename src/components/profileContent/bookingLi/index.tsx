@@ -1,8 +1,13 @@
 import React from 'react';
 import PrimaryButton from '../../buttons/primaryButton';
+
+interface BookingLiProps {
+  booking: any;
+  onClick: () => void;
+}
 import { FaPen } from 'react-icons/fa';
 
-function BookingLi({ booking, onClick }) {
+function BookingLi({ booking, onClick }: BookingLiProps){
   const { venue, dateFrom, dateTo } = booking;
   const { location } = venue || {};
   

@@ -92,7 +92,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({ onSubmit, bookings, p
           selectsRange={true}
           startDate={startDate}
           endDate={endDate}
-          onChange={update => setDateRange(update as [Date | null, Date | null])}
+          onChange={(update: [Date | null, Date | null]) => setDateRange(update as [Date | null, Date | null])}
           className="w-full border p-2"
           inline
           excludeDates={bookedDates}
