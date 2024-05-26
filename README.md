@@ -11,7 +11,9 @@ This project is part of my exam where I have attempted to learn and apply TypeSc
 - **React Router**: For handling client-side routing.
 - **Axios**: For making HTTP requests.
 
-## Setup instructions
+## Setup Instructions
+
+Follow these steps to set up the project locally:
 
 ### Prerequisites
 
@@ -21,11 +23,11 @@ Make sure you have the following installed:
 - npm (>= 6.x) or yarn (>= 1.22.x)
 - Git
 
-###Clone the Repository
+### Clone the Repository
 
 First, clone the repository to your local machine using git:
 
-\`\`\`
+\`\`\`bash
 git clone https://github.com/your-username/holidaze.git
 cd holidaze
 \`\`\`
@@ -34,48 +36,55 @@ cd holidaze
 
 Install the project dependencies using npm or yarn:
 
-\`\`\`
-
+\`\`\`bash
 # Using npm
-
 npm install
 
 # Using yarn
-
 yarn install
 \`\`\`
+
 
 ### Running the Development Server
 
 Start the development server:
 
-\`\`\`
-
+\`\`\`bash
 # Using npm
-
 npm run dev
 
 # Using yarn
-
 yarn dev
 \`\`\`
 
-This will start the Vite development server and you can view the project by navigating to http://localhost:3000 in your web browser.
+This will start the Vite development server and you can view the project by navigating to `http://localhost:3000` in your web browser.
 
 ### Building for Production
 
 To create a production build, run:
 
-\`\`\`
-
+\`\`\`bash
 # Using npm
-
 npm run build
 
 # Using yarn
-
 yarn build
 \`\`\`
+
+This will output the production build files to the `dist` directory.
+
+### Previewing the Production Build
+
+To preview the production build locally, run:
+
+\`\`\`bash
+# Using npm
+npm run preview
+
+# Using yarn
+yarn preview
+\`\`\`
+
 
 ## Learning Goals
 
@@ -87,5 +96,12 @@ This project was an opportunity for me to:
 - Manage state and side effects in a React application.
 - Interact with APIs using Axios.
 - Set up and configure a modern front-end development environment using Vite.
-- Contributing
-- If you'd like to contribute to this project, please fork the repository and use a feature branch. Pull requests are warmly welcome.
+
+## Contributing
+
+If you'd like to contribute to this project, please fork the repository and use a feature branch. Pull requests are warmly welcome.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for more information.
+
