@@ -27,35 +27,34 @@ Make sure you have the following installed:
 
 First, clone the repository to your local machine using git:
 
-\`\`\`bash
-git clone https://github.com/your-username/holidaze.git
+
+git clone https://github.com/EM-90/holidaze.git
 cd holidaze
-\`\`\`
+
 
 ### Install Dependencies
 
 Install the project dependencies using npm or yarn:
 
-\`\`\`bash
-# Using npm
+#Using npm
 npm install
 
-# Using yarn
+#Using yarn
 yarn install
-\`\`\`
+
 
 
 ### Running the Development Server
 
 Start the development server:
 
-\`\`\`bash
-# Using npm
+
+#Using npm
 npm run dev
 
-# Using yarn
+#Using yarn
 yarn dev
-\`\`\`
+
 
 This will start the Vite development server and you can view the project by navigating to `http://localhost:3000` in your web browser.
 
@@ -63,13 +62,13 @@ This will start the Vite development server and you can view the project by navi
 
 To create a production build, run:
 
-\`\`\`bash
-# Using npm
+
+#Using npm
 npm run build
 
-# Using yarn
+#Using yarn
 yarn build
-\`\`\`
+
 
 This will output the production build files to the `dist` directory.
 
@@ -77,13 +76,13 @@ This will output the production build files to the `dist` directory.
 
 To preview the production build locally, run:
 
-\`\`\`bash
-# Using npm
+
+#Using npm
 npm run preview
 
-# Using yarn
+#Using yarn
 yarn preview
-\`\`\`
+
 
 
 ## Learning Goals
