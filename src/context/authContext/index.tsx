@@ -114,11 +114,19 @@ export const AuthProvider: FunctionComponent<{ children: ReactNode }> = ({
         password,
         venueManager,
       });
-      if (newUser && newUser.accessToken) {
-        setUser(newUser);
-        saveUserToLocalStorage(newUser);
+
+      if (newUser && newUser.email) {
+        const loginResponse = await authAPI.login({ email, password });
+        if (loginResponse && loginResponse.accessToken) {
+          setUser(loginResponse);
+          saveUserToLocalStorage(loginResponse);
+        } else {
+          throw new Error(
+            "Login after registration failed: Missing access token"
+          );
+        }
       } else {
-        throw new Error("Missing access token");
+        throw new Error("Registration failed: User data is missing");
       }
     } catch (error) {
       console.error("Registration failed:", error);

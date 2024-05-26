@@ -61,13 +61,13 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onLoginClick }) => {
     }
   };
   return (
-    <div className="container mx-auto my-7 min-h-screen flex flex-col mt-40 items-center ">
+    <div className="container mx-auto my-7 min-h-screen flex flex-col mt-40 items-center">
       <h2 className="text-5xl font-light mb-10">Register</h2>
       <form
-        className="mb-40  sm:w-96 md:w-96  lg:w-96"
+        className="mb-40 sm:w-96 md:w-96 lg:w-96"
         onSubmit={handleFormSubmit}
       >
-        <div className="checkbox flex item-center my-7">
+        <div className="checkbox flex items-center my-7">
           <input
             type="checkbox"
             id="venueManager"
