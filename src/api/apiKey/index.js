@@ -7,7 +7,4 @@
   "meta": {}
 }*/
 
- export const apiKey = "075730bd-68c5-4092-b068-cc7196aacc77";
-
-
-
+export const apiKey = "075730bd-68c5-4092-b068-cc7196aacc77";

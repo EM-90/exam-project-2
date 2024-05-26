@@ -1,10 +1,10 @@
-import React from 'react';
-import { FaPen, FaTrash } from 'react-icons/fa';
-import PrimaryButton from '../../buttons/primaryButton';
-import FeedbackMessage from '../../messages/feedbackMessage';
+import React from "react";
+import { FaPen, FaTrash } from "react-icons/fa";
+import PrimaryButton from "../../buttons/primaryButton";
+import FeedbackMessage from "../../messages/feedbackMessage";
 
 interface VenueManagerLiProps {
-  venue: any; 
+  venue: any;
   onClick: () => void;
   onEdit: () => void;
   onDelete: () => void;
@@ -12,7 +12,6 @@ interface VenueManagerLiProps {
   showFeedbackMessage: boolean;
   isSuccessMessage: boolean;
 }
-
 
 const VenueManagerLi: React.FC<VenueManagerLiProps> = ({
   venue,
@@ -23,12 +22,15 @@ const VenueManagerLi: React.FC<VenueManagerLiProps> = ({
   showFeedbackMessage,
   isSuccessMessage,
 }) => {
-  const messageClassName = isSuccessMessage ? 'bg-green-200 text-green-600' : 'bg-blue-200 text-blue-600';
-  
+  const messageClassName = isSuccessMessage
+    ? "bg-green-200 text-green-600"
+    : "bg-blue-200 text-blue-600";
+
   return (
     <article
       onClick={onClick}
-      className="h-full cursor-pointer flex flex-col sm:flex-row border-b-2 p-5 hover:bg-skin-createBg">
+      className="h-full cursor-pointer flex flex-col sm:flex-row border-b-2 p-5 hover:bg-skin-createBg"
+    >
       <section className="flex flex-col sm:flex-row items-start gap-5 w-full">
         <div className="h-full w-full flex flex-col sm:flex-row gap-4">
           <div className="relative h-full">
@@ -51,23 +53,32 @@ const VenueManagerLi: React.FC<VenueManagerLiProps> = ({
           <div className="flex flex-col gap-2">
             <div>
               <h4 className="font-semibold text-skin-mutedText">Location</h4>
-              <p className="text-skin-primary text-xl">{venue.location.country}</p>
+              <p className="text-skin-primary text-xl">
+                {venue.location.country}
+              </p>
             </div>
             <div>
               <h4 className="font-semibold text-skin-mutedText">Address</h4>
               <p className="text-skin-primary text-xl">
-                <span>{venue.location.city}</span>, <span>{venue.location.address}</span>
+                <span>{venue.location.city}</span>,{" "}
+                <span>{venue.location.address}</span>
               </p>
             </div>
             <div className="self-start">
               <p className="text-skin-tagTextColor text-xl">
-                Bookings: <span className="font-medium">{venue._count.bookings}</span>
+                Bookings:{" "}
+                <span className="font-medium">{venue._count.bookings}</span>
               </p>
             </div>
           </div>
         </div>
       </section>
-      {showFeedbackMessage && <FeedbackMessage feedbackMessage={feedbackMessage} className={messageClassName} />}
+      {showFeedbackMessage && (
+        <FeedbackMessage
+          feedbackMessage={feedbackMessage}
+          className={messageClassName}
+        />
+      )}
       <div className="flex justify-start sm:justify-center sm:flex-col gap-2 mt-4 sm:mt-0 sm:ml-auto">
         <PrimaryButton
           className="trashIcon p-4 text-gray-500 hover:bg-gray-200"
@@ -82,10 +93,6 @@ const VenueManagerLi: React.FC<VenueManagerLiProps> = ({
       </div>
     </article>
   );
-}
+};
 
 export default VenueManagerLi;
-
-
-
-

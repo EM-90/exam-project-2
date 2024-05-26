@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent } from "react";
 
 interface TextInputProps {
   label: string;
@@ -16,7 +16,7 @@ export const TextInput: React.FC<TextInputProps> = ({
   value,
   onChange,
   placeholder,
-  type = 'text',
+  type = "text",
   required = false,
 }) => (
   <div>
@@ -53,7 +53,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       name={name}
       checked={checked}
       onChange={onChange}
-    />{' '}
+    />{" "}
     {label}
   </label>
 );
@@ -87,9 +87,3 @@ export const TextArea: React.FC<TextAreaProps> = ({
     />
   </div>
 );
-
-
-
-
-
-

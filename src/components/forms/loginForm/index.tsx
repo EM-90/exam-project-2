@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useAuth } from '../../../context/authContext';
-import ValidationError from '../../messages/validationError';
+import React, { useState } from "react";
+import { useAuth } from "../../../context/authContext";
+import ValidationError from "../../messages/validationError";
 
 interface LoginFormProps {
   onRegisterClick: () => void;
@@ -18,19 +18,19 @@ const LoginForm: React.FC<LoginFormProps> = ({ onRegisterClick }) => {
     if (error) {
       setErrorMessage(error);
     } else {
-      setErrorMessage(null); 
+      setErrorMessage(null);
     }
   };
 
   return (
-    <div className='container  min-h-screen flex flex-col mt-40 items-center '>
+    <div className="container  min-h-screen flex flex-col mt-40 items-center ">
       <h2 className="text-5xl font-light mb-10">Login</h2>
-      {errorMessage && (
-          <ValidationError errorMessage={errorMessage}/>
-        )}
-      <form className='mb-40 sm:w-96 md:w-96  lg:w-96' onSubmit={handleSubmit}>  
+      {errorMessage && <ValidationError errorMessage={errorMessage} />}
+      <form className="mb-40 sm:w-96 md:w-96  lg:w-96" onSubmit={handleSubmit}>
         <div className="mb-6">
-          <label htmlFor="email" className="block mb-2 font-medium">Email</label>
+          <label htmlFor="email" className="block mb-2 font-medium">
+            Email
+          </label>
           <input
             type="email"
             id="email"
@@ -40,7 +40,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onRegisterClick }) => {
           />
         </div>
         <div className="mb-6">
-          <label htmlFor="password" className="block mb-2 font-medium">Password</label>
+          <label htmlFor="password" className="block mb-2 font-medium">
+            Password
+          </label>
           <input
             type="password"
             id="password"
@@ -56,13 +58,17 @@ const LoginForm: React.FC<LoginFormProps> = ({ onRegisterClick }) => {
         >
           Login
         </button>
-        <button className="my-4  text-center underline text-blue-900 font-medium" onClick={onRegisterClick}>Don't have an account? Register here</button>
+        <button
+          className="my-4  text-center underline text-blue-900 font-medium"
+          onClick={onRegisterClick}
+        >
+          Don't have an account? Register here
+        </button>
       </form>
     </div>
   );
-}
+};
 
 export default LoginForm;
 
-//have to change the width of form 
-
+//have to change the width of form

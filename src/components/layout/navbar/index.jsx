@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { HiOutlineUserCircle } from "react-icons/hi";
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../../context/authContext';
+import { Link } from "react-router-dom";
+import { useAuth } from "../../../context/authContext";
 
 function Navbar() {
   const { user, logout } = useAuth();
@@ -13,7 +13,7 @@ function Navbar() {
 
   const closeMenu = () => {
     setIsOpen(false);
-  }
+  };
 
   return (
     <div className="shadow-md bg-white">
@@ -27,8 +27,6 @@ function Navbar() {
               type="button"
               className="px-4 text-skin-primary hover:text-blue-400 focus:outline-none"
             >
-              {/* Your menu icon */}
-              {/* You can replace this with your custom menu icon */}
               <svg
                 className="h-6 w-6"
                 fill="none"
@@ -54,8 +52,12 @@ function Navbar() {
             </button>
           </div>
 
-          {/* Your mobile menu */}
-          <div className={`md:hidden fixed flex   inset-0 bg-skin-primary z-50 overflow-hidden transition-opacity  ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+          {/* Mobile menu */}
+          <div
+            className={`md:hidden fixed flex   inset-0 bg-skin-primary z-50 overflow-hidden transition-opacity  ${
+              isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
+          >
             <button
               onClick={toggleMenu}
               type="button"
@@ -78,42 +80,84 @@ function Navbar() {
             </button>
             <ul className="space-y-4 pt-8 pl-7">
               <li>
-                <Link to="/" onClick={closeMenu} className="text-white hover:font-bold text-3xl">Home</Link>
+                <Link
+                  to="/"
+                  onClick={closeMenu}
+                  className="text-white hover:font-bold text-3xl"
+                >
+                  Home
+                </Link>
               </li>
               <li>
-                <Link to="/about" onClick={closeMenu} className="text-white hover:font-bold text-3xl">About</Link>
+                <Link
+                  to="/about"
+                  onClick={closeMenu}
+                  className="text-white hover:font-bold text-3xl"
+                >
+                  About
+                </Link>
               </li>
               <li>
-                <Link to="/contact" onClick={closeMenu}  className="text-white hover:font-bold text-3xl">Contact</Link>
+                <Link
+                  to="/contact"
+                  onClick={closeMenu}
+                  className="text-white hover:font-bold text-3xl"
+                >
+                  Contact
+                </Link>
               </li>
               {user && (
                 <li>
-                  <button onClick={logout} className="text-white hover:font-bold text-3xl">Logout</button>
+                  <button
+                    onClick={logout}
+                    className="text-white hover:font-bold text-3xl"
+                  >
+                    Logout
+                  </button>
                 </li>
               )}
               <li>
-                <Link to="/profile" onClick={closeMenu} >
+                <Link to="/profile" onClick={closeMenu}>
                   <HiOutlineUserCircle className="h-10 w-10 text-white hover:font-bold" />
                 </Link>
               </li>
-              
             </ul>
           </div>
 
           {/*Desktop menu */}
           <ul className="hidden md:flex space-x-4">
             <li>
-              <Link to="/" className="text-gray-700 font-medium hover:text-skin-primary ps-5">Home</Link>
+              <Link
+                to="/"
+                className="text-gray-700 font-medium hover:text-skin-primary ps-5"
+              >
+                Home
+              </Link>
             </li>
             <li>
-              <Link  to="/about" className="text-gray-700 font-medium hover:text-skin-primary ps-5">About</Link> 
+              <Link
+                to="/about"
+                className="text-gray-700 font-medium hover:text-skin-primary ps-5"
+              >
+                About
+              </Link>
             </li>
             <li>
-              <Link to="/contact" className="text-gray-700 font-medium hover:text-skin-primary ps-5">Contact</Link>
+              <Link
+                to="/contact"
+                className="text-gray-700 font-medium hover:text-skin-primary ps-5"
+              >
+                Contact
+              </Link>
             </li>
             {user && (
               <li>
-                <button onClick={logout} className="text-gray-700 font-medium hover:text-skin-primary ps-5">Logout</button>
+                <button
+                  onClick={logout}
+                  className="text-gray-700 font-medium hover:text-skin-primary ps-5"
+                >
+                  Logout
+                </button>
               </li>
             )}
             <Link to="/profile">
@@ -127,6 +171,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-
-

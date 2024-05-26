@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { FaSearch } from 'react-icons/fa'
+import React, { useState } from "react";
+import { FaSearch } from "react-icons/fa";
 
 interface SearchProps {
   value: string;
@@ -21,4 +21,4 @@ export const Search: React.FC<SearchProps> = ({ value, onChange }) => {
   );
 };
 
-export default Search
+export default Search;

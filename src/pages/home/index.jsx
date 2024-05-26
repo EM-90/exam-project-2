@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import Card from '../../components/card';
-import { venueAPI } from '../../api/venue';
-import { useNavigate } from 'react-router-dom';
-import Search from '../../components/search';
+import React, { useEffect, useState } from "react";
+import Card from "../../components/card";
+import { venueAPI } from "../../api/venue";
+import { useNavigate } from "react-router-dom";
+import Search from "../../components/search";
 
 function Home() {
   const [data, setData] = useState([]);
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const navigate = useNavigate();
 
@@ -19,9 +19,9 @@ function Home() {
       try {
         const response = await venueAPI.fetchAllVenues();
         setData(response.data.data);
-        setFilteredData(response.data.data); 
+        setFilteredData(response.data.data);
       } catch (error) {
-        console.error('Failed to fetch data:', error);
+        console.error("Failed to fetch data:", error);
       }
     };
 
@@ -30,10 +30,10 @@ function Home() {
 
   const handleChange = (value) => {
     setSearchInput(value);
-    if (value === '') {
-      setFilteredData(data); 
+    if (value === "") {
+      setFilteredData(data);
     } else {
-      const filtered = data.filter(item =>
+      const filtered = data.filter((item) =>
         item.name.toLowerCase().includes(value.toLowerCase())
       );
       setFilteredData(filtered);
@@ -46,7 +46,12 @@ function Home() {
       <Search value={searchInput} onChange={handleChange} />
       <div className="sm:grid xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 gap-x-5 py-8">
         {filteredData.map((item) => (
-          <Card key={item.id} className="card" item={item} onClick={() => handleClick(item.id)} />
+          <Card
+            key={item.id}
+            className="card"
+            item={item}
+            onClick={() => handleClick(item.id)}
+          />
         ))}
       </div>
     </div>
@@ -54,6 +59,3 @@ function Home() {
 }
 
 export default Home;
-
-
-

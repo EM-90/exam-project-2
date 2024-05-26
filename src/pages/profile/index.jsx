@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LoginForm from "../../components/forms/loginForm";
 import RegisterForm from "../../components/forms/registerForm";
-import { useAuth } from '../../context/authContext';
+import { useAuth } from "../../context/authContext";
 import ProfileHeader from "../../components/profileContent/profileHeader";
 import VenueForm from "../../components/forms/venueForm";
 import Modal from "../../components/modal";
@@ -10,20 +10,24 @@ import { profileAPI } from "../../api/profiles";
 import VenueManagerLi from "../../components/profileContent/venueManagerLi";
 import { useNavigate } from "react-router-dom";
 import useVenueForm from "../../hooks/useVenueForm";
-import { handleCreate, handleUpdate, handleDelete } from "../../helpers/handlers";
+import {
+  handleCreate,
+  handleUpdate,
+  handleDelete,
+} from "../../helpers/handlers";
 import BookingLi from "../../components/profileContent/bookingLi";
 import { FaPlus } from "react-icons/fa6";
 
 function Profile() {
   const { user } = useAuth();
   const [showRegisterForm, setShowRegisterForm] = useState(false);
-  const toggleForm = () => setShowRegisterForm(prev => !prev);
+  const toggleForm = () => setShowRegisterForm((prev) => !prev);
   const [showModal, setShowModal] = useState(false);
   const [selectedVenueId, setSelectedVenueId] = useState();
   const [venues, setVenues] = useState([]);
   const [userBookings, setUserBookings] = useState([]);
   const [formData, handleChange, resetFormData] = useVenueForm(selectedVenueId);
-  const [feedbackMessage, setFeedbackMessage] = useState('');
+  const [feedbackMessage, setFeedbackMessage] = useState("");
   const [showFeedbackMessage, setShowFeedbackMessage] = useState(false);
   const [isSuccessMessage, setIsSuccessMessage] = useState(false);
   const [updatedVenueId, setUpdatedVenueId] = useState(null);
@@ -31,7 +35,7 @@ function Profile() {
   const [venueToDelete, setVenueToDelete] = useState(null);
   const navigate = useNavigate();
 
-  const toggleModal = () => setShowModal(prev => !prev);
+  const toggleModal = () => setShowModal((prev) => !prev);
 
   const openModal = (venueId) => {
     setSelectedVenueId(venueId);
@@ -50,7 +54,7 @@ function Profile() {
     event.preventDefault();
     if (selectedVenueId) {
       await handleUpdate(event, selectedVenueId, formData);
-      setFeedbackMessage('Updated');
+      setFeedbackMessage("Updated");
       setIsSuccessMessage(false);
       setShowFeedbackMessage(true);
       setUpdatedVenueId(selectedVenueId);
@@ -59,7 +63,7 @@ function Profile() {
     } else {
       await handleCreate(event, formData, (newVenue) => {
         setVenues((prevVenues) => [newVenue, ...prevVenues]);
-        setFeedbackMessage('New');
+        setFeedbackMessage("New");
         setIsSuccessMessage(true);
         setShowFeedbackMessage(true);
         setUpdatedVenueId(newVenue.id);
@@ -86,11 +90,16 @@ function Profile() {
 
   const fetchBookings = async () => {
     try {
-      const bookingResponse = await profileAPI.fetchProfileBookings(user.name, 'true');
-      const sortedBookings = bookingResponse.data.data.bookings.sort((a, b) => new Date(b.created) - new Date(a.created));
+      const bookingResponse = await profileAPI.fetchProfileBookings(
+        user.name,
+        "true"
+      );
+      const sortedBookings = bookingResponse.data.data.bookings.sort(
+        (a, b) => new Date(b.created) - new Date(a.created)
+      );
       setUserBookings(sortedBookings);
     } catch (error) {
-      console.error('Failed to fetch bookings:', error);
+      console.error("Failed to fetch bookings:", error);
     }
   };
 
@@ -102,7 +111,7 @@ function Profile() {
           setVenues(response.data.data);
           await fetchBookings();
         } catch (error) {
-          console.error('Failed to fetch data:', error);
+          console.error("Failed to fetch data:", error);
         }
       }
     };
@@ -118,12 +127,16 @@ function Profile() {
           {user.venueManager && (
             <>
               <section>
-                <h2 className="my-5 text-4xl font-regular mt-10 text-black">My Venues</h2>
-                <PrimaryButton 
-                 onClick={() => openModal(null)}
-                 className=" flex items-center gap-4 rounded-full shadow-lg py-2.5 px-5 mb-10 mt-5 bg-skin-infoBg text-skin-primary hover:bg-skin-primary hover:text-white text-lg"
-                 disabled={false}>
-                  <p>Add venue</p><FaPlus size={28}/>
+                <h2 className="my-5 text-4xl font-regular mt-10 text-black">
+                  My Venues
+                </h2>
+                <PrimaryButton
+                  onClick={() => openModal(null)}
+                  className=" flex items-center gap-4 rounded-full shadow-lg py-2.5 px-5 mb-10 mt-5 bg-skin-infoBg text-skin-primary hover:bg-skin-primary hover:text-white text-lg"
+                  disabled={false}
+                >
+                  <p>Add venue</p>
+                  <FaPlus size={28} />
                 </PrimaryButton>
                 <Modal isOpen={showModal} onClose={toggleModal}>
                   <VenueForm
@@ -135,7 +148,7 @@ function Profile() {
                 </Modal>
               </section>
               <section>
-                {venues.map(venue => (
+                {venues.map((venue) => (
                   <VenueManagerLi
                     key={venue.id}
                     venue={venue}
@@ -143,7 +156,9 @@ function Profile() {
                     onEdit={() => openModal(venue.id)}
                     onDelete={() => handleDeleteClick(venue.id)}
                     feedbackMessage={feedbackMessage}
-                    showFeedbackMessage={showFeedbackMessage && updatedVenueId === venue.id}
+                    showFeedbackMessage={
+                      showFeedbackMessage && updatedVenueId === venue.id
+                    }
                     isSuccessMessage={isSuccessMessage}
                   />
                 ))}
@@ -151,9 +166,15 @@ function Profile() {
             </>
           )}
           <section>
-            <h2 className="my-5 text-4xl font-regular mt-20 text-black">My Bookings</h2>
+            <h2 className="my-5 text-4xl font-regular mt-20 text-black">
+              My Bookings
+            </h2>
             {userBookings.map((booking) => (
-              <BookingLi key={booking.id} booking={booking} onClick={() => handleClick(booking.venue.id)} />
+              <BookingLi
+                key={booking.id}
+                booking={booking}
+                onClick={() => handleClick(booking.venue.id)}
+              />
             ))}
           </section>
         </>
@@ -167,13 +188,28 @@ function Profile() {
         </section>
       )}
       {showConfirmModal && (
-        <Modal isOpen={showConfirmModal} onClose={() => setShowConfirmModal(false)}>
+        <Modal
+          isOpen={showConfirmModal}
+          onClose={() => setShowConfirmModal(false)}
+        >
           <div className="p-4 sm:flex flex-col">
-            <h2 className="text-xl font-bold mb-4 text-skin-primary">Confirm Delete</h2>
+            <h2 className="text-xl font-bold mb-4 text-skin-primary">
+              Confirm Delete
+            </h2>
             <p>Are you sure you want to delete this venue?</p>
             <div className="flex gap-4 justify-start sm:justify-between mt-4">
-              <PrimaryButton onClick={confirmDelete} className="bg-red-500 hover:bg-red-600 px-2 sm:px-7 sm:py-2 text-white">Delete</PrimaryButton>
-              <PrimaryButton onClick={() => setShowConfirmModal(false)} className=" px-2 py-1 sm:px-7 sm:py-2 bg-gray-100 hover:bg-gray-200">Cancel</PrimaryButton>
+              <PrimaryButton
+                onClick={confirmDelete}
+                className="bg-red-500 hover:bg-red-600 px-2 sm:px-7 sm:py-2 text-white"
+              >
+                Delete
+              </PrimaryButton>
+              <PrimaryButton
+                onClick={() => setShowConfirmModal(false)}
+                className=" px-2 py-1 sm:px-7 sm:py-2 bg-gray-100 hover:bg-gray-200"
+              >
+                Cancel
+              </PrimaryButton>
             </div>
           </div>
         </Modal>
@@ -183,14 +219,3 @@ function Profile() {
 }
 
 export default Profile;
-
-
-
-
-
-
-
-
-
-
-

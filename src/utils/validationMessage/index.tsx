@@ -1,4 +1,7 @@
-const validationMessage = (errors: any[], successMessage: string): string | null => {
+const validationMessage = (
+  errors: any[],
+  successMessage: string
+): string | null => {
   if (!errors || errors.length === 0) {
     return successMessage;
   } else {
@@ -7,6 +10,3 @@ const validationMessage = (errors: any[], successMessage: string): string | null
 };
 
 export default validationMessage;
-
-
-  
