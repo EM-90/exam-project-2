@@ -67,11 +67,11 @@ function ProfileHeader() {
     <header className="profile-header relative">
       <figure>
         <img
-          className="w-full h-60 sm:object-cover sm:rounded-md"
+          className="w-full h-60 object-cover sm:rounded-md"
           src={user.banner.url}
           alt={user.banner.alt}
         />
-        <figcaption className="absolute avatarSection flex flex-wrap items-center top-6 left-6">
+        <figcaption className="absolute avatarSection flex flex-wrap items-center top-4 left-3">
           <ProfileBadge
             name={user.name}
             email={user.email}

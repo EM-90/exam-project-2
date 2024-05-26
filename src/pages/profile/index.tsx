@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import LoginForm from "../../components/forms/loginForm";
 import RegisterForm from "../../components/forms/registerForm";
 import { useAuth } from "../../context/authContext";
