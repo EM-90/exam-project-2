@@ -6,6 +6,5 @@ export const PriceCalculator = (
 ): number => {
   if (!startDate || !endDate) return 0;
   const dates = getDatesInRange(startDate, endDate);
-  console.log("Dates in range:", dates);
   return dates.length * pricePerNight;
 };

@@ -3,14 +3,14 @@ import PrimaryButton from "../../buttons/primaryButton";
 import { TextArea, TextInput, Checkbox } from "../formContent";
 
 interface VenueFormProps {
-  handleSubmit: (event: React.FormEvent) => void;
+  handleSubmit: (event: React.FormEvent) => Promise<void>;
   handleChange: (
     event: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => void;
   formData: any;
-  venueId?: string;
+  venueId: string | null;
 }
 
 const VenueForm: React.FC<VenueFormProps> = ({

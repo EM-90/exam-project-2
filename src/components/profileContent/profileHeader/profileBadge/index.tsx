@@ -1,5 +1,3 @@
-import React from "react";
-
 interface ProfileBadgeProps {
   name?: string;
   email?: string;

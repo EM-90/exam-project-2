@@ -1,8 +1,17 @@
 import { HiOutlineStar } from "react-icons/hi";
 
-function Card({ item, onClick }) {
+interface CardProps {
+  item: any;
+  onClick: () => void;
+  className?: string;
+}
+
+const Card: React.FC<CardProps> = ({ item, onClick, className }) => {
   return (
-    <article className="card w-full cursor-pointer my-4" onClick={onClick}>
+    <article
+      className={`card w-full cursor-pointer mt-8 ${className}`}
+      onClick={onClick}
+    >
       <figure className="imageContainer min-w-30 max-w-full h-60">
         {item.media && item.media.length > 0 && (
           <img
@@ -34,6 +43,6 @@ function Card({ item, onClick }) {
       </section>
     </article>
   );
-}
+};
 
 export default Card;

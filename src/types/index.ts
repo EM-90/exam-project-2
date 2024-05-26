@@ -46,6 +46,12 @@ export interface Booking {
   dateTo: string;
   guests: number;
   venueId: string;
+  created: string;
+  venue: {
+    id: string;
+    name: string;
+    media: { url: string; alt: string }[];
+  };
   customer: {
     name: string;
     email: string;
@@ -77,6 +83,7 @@ export interface Profile {
     alt?: string;
   };
   venueManager: boolean;
+  bookings?: Booking[];
 }
 
 export interface ApiResponse<T> {

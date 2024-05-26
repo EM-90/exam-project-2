@@ -19,15 +19,12 @@ const VenueDetails: React.FC = () => {
     const fetchVenueData = async () => {
       if (venueId) {
         try {
-          console.log(`Fetching data for venue ID: ${venueId}`);
           const response = await venueAPI.fetchVenueById(venueId, true, true);
           setVenueData(response.data.data);
-          console.log("Venue Data:", response.data.data);
 
           const { bookings } = response.data.data;
           if (bookings && bookings.length > 0) {
             setBookings(bookings);
-            console.log("Fetched Bookings: ", bookings);
           } else {
             console.log("No bookings found.");
           }
