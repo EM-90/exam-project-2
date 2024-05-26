@@ -16,7 +16,7 @@ function Navbar() {
   };
 
   return (
-    <div className="shadow-md bg-white">
+    <header className="shadow-md bg-white">
       <div className="container mx-auto py-4 px-7">
         <div className="flex items-center justify-between">
           <h1 className="text-skin-primary text-2xl font-bold">Holidaze</h1>
@@ -26,6 +26,7 @@ function Navbar() {
               onClick={toggleMenu}
               type="button"
               className="px-4 text-skin-primary hover:text-blue-400 focus:outline-none"
+              aria-label="Toggle menu"
             >
               <svg
                 className="h-6 w-6"
@@ -52,18 +53,18 @@ function Navbar() {
             </button>
           </div>
 
-          {/* Mobile menu */}
-          <div
-            className={`md:hidden fixed flex   inset-0 bg-skin-primary z-50 overflow-hidden transition-opacity  ${
+          <nav
+            className={`md:hidden fixed flex inset-0 bg-skin-primary z-50 overflow-hidden transition-opacity ${
               isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
             }`}
+            aria-label="Mobile menu"
           >
             <button
               onClick={toggleMenu}
               type="button"
               className="absolute top-0 right-0 mt-4 mr-4 text-white hover:text-gray-200 focus:outline-none px-7"
+              aria-label="Close menu"
             >
-              {/* Close icon */}
               <svg
                 className="h-6 w-6"
                 fill="none"
@@ -122,51 +123,54 @@ function Navbar() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
-          {/*Desktop menu */}
-          <ul className="hidden md:flex space-x-4">
-            <li>
-              <Link
-                to="/"
-                className="text-gray-700 font-medium hover:text-skin-primary ps-5"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/about"
-                className="text-gray-700 font-medium hover:text-skin-primary ps-5"
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/contact"
-                className="text-gray-700 font-medium hover:text-skin-primary ps-5"
-              >
-                Contact
-              </Link>
-            </li>
-            {user && (
+          <nav aria-label="Desktop menu" className="hidden md:flex space-x-4">
+            <ul className="flex space-x-4">
               <li>
-                <button
-                  onClick={logout}
+                <Link
+                  to="/"
                   className="text-gray-700 font-medium hover:text-skin-primary ps-5"
                 >
-                  Logout
-                </button>
+                  Home
+                </Link>
               </li>
-            )}
-            <Link to="/profile">
-              <HiOutlineUserCircle className="h-8 w-8 text-gray-700 hover:text-skin-primary" />
-            </Link>
-          </ul>
+              <li>
+                <Link
+                  to="/about"
+                  className="text-gray-700 font-medium hover:text-skin-primary ps-5"
+                >
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  className="text-gray-700 font-medium hover:text-skin-primary ps-5"
+                >
+                  Contact
+                </Link>
+              </li>
+              {user && (
+                <li>
+                  <button
+                    onClick={logout}
+                    className="text-gray-700 font-medium hover:text-skin-primary ps-5"
+                  >
+                    Logout
+                  </button>
+                </li>
+              )}
+              <li>
+                <Link to="/profile">
+                  <HiOutlineUserCircle className="h-8 w-8 text-gray-700 hover:text-skin-primary" />
+                </Link>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
 

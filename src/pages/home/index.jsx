@@ -41,10 +41,10 @@ function Home() {
   };
 
   return (
-    <div className="container mx-auto my-7 px-7">
+    <main className="container mx-auto my-7 px-7">
       <h1 className="text-5xl font-light mb-7">Venues</h1>
       <Search value={searchInput} onChange={handleChange} />
-      <div className="sm:grid xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 gap-x-5 py-8">
+      <article className="sm:grid xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1 gap-x-5 py-8">
         {filteredData.map((item) => (
           <Card
             key={item.id}
@@ -53,8 +53,8 @@ function Home() {
             onClick={() => handleClick(item.id)}
           />
         ))}
-      </div>
-    </div>
+      </article>
+    </main>
   );
 }
 

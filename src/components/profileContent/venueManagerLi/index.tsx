@@ -32,46 +32,44 @@ const VenueManagerLi: React.FC<VenueManagerLiProps> = ({
       className="h-full cursor-pointer flex flex-col sm:flex-row border-b-2 p-5 hover:bg-skin-createBg"
     >
       <section className="flex flex-col sm:flex-row items-start gap-5 w-full">
-        <div className="h-full w-full flex flex-col sm:flex-row gap-4">
-          <div className="relative h-full">
-            <img
-              src={venue.media[0].url}
-              alt={venue.media[0].alt}
-              className=" w-full object-cover max-h-60 sm:min-h-32 sm:max-h-32 sm:min-w-44 sm:max-w-44 rounded-lg shadow-md"
-            />
-            <PrimaryButton
-              className="absolute top-1 left-1 bg-skin-infoBg p-2 hover:bg-skin-primary hover:text-white text-skin-primary"
-              disabled={false}
-              onClick={(e) => {
-                e.stopPropagation();
-                onEdit();
-              }}
-            >
-              <FaPen size={26} />
-            </PrimaryButton>
+        <article className="relative h-full">
+          <img
+            src={venue.media[0].url}
+            alt={venue.media[0].alt}
+            className=" w-full object-cover max-h-60 sm:min-h-32 sm:max-h-32 sm:min-w-44 sm:max-w-44 rounded-lg shadow-md"
+          />
+          <PrimaryButton
+            className="absolute top-1 left-1 bg-skin-infoBg p-2 hover:bg-skin-primary hover:text-white text-skin-primary"
+            disabled={false}
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit();
+            }}
+          >
+            <FaPen size={26} />
+          </PrimaryButton>
+        </article>
+        <article className="flex flex-col gap-2">
+          <section>
+            <h4 className="font-semibold text-skin-mutedText">Location</h4>
+            <p className="text-skin-primary text-xl">
+              {venue.location.country}
+            </p>
+          </section>
+          <section>
+            <h4 className="font-semibold text-skin-mutedText">Address</h4>
+            <p className="text-skin-primary text-xl">
+              <span>{venue.location.city}</span>,{" "}
+              <span>{venue.location.address}</span>
+            </p>
+          </section>
+          <div className="self-start">
+            <p className="text-skin-tagTextColor text-xl">
+              Bookings:{" "}
+              <span className="font-medium">{venue._count.bookings}</span>
+            </p>
           </div>
-          <div className="flex flex-col gap-2">
-            <div>
-              <h4 className="font-semibold text-skin-mutedText">Location</h4>
-              <p className="text-skin-primary text-xl">
-                {venue.location.country}
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold text-skin-mutedText">Address</h4>
-              <p className="text-skin-primary text-xl">
-                <span>{venue.location.city}</span>,{" "}
-                <span>{venue.location.address}</span>
-              </p>
-            </div>
-            <div className="self-start">
-              <p className="text-skin-tagTextColor text-xl">
-                Bookings:{" "}
-                <span className="font-medium">{venue._count.bookings}</span>
-              </p>
-            </div>
-          </div>
-        </div>
+        </article>
       </section>
       {showFeedbackMessage && (
         <FeedbackMessage

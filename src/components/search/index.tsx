@@ -8,7 +8,7 @@ interface SearchProps {
 
 export const Search: React.FC<SearchProps> = ({ value, onChange }) => {
   return (
-    <article className="inputWrapper border-2 flex items-center p-2 rounded-md">
+    <form className="inputWrapper border-2 flex items-center p-2 rounded-md">
       <FaSearch size={24} className="text-skin-primary mx-2" />
       <input
         type="text"
@@ -17,7 +17,7 @@ export const Search: React.FC<SearchProps> = ({ value, onChange }) => {
         placeholder="Type to search for venue"
         className="border-none focus:outline-none text-lg w-full py-1"
       />
-    </article>
+    </form>
   );
 };
 

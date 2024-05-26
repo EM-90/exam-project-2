@@ -65,23 +65,25 @@ function ProfileHeader() {
 
   return (
     <div className="my-7">
-      <article className="profile-header relative">
-        <img
-          className="w-full h-60 sm:object-cover sm:rounded-md"
-          src={user.banner.url}
-          alt={user.banner.alt}
-        />
-        <div className="absolute avatarSection flex flex-wrap items-center top-6 left-e: React.ChangeEvent<HTMLInputElement> sm:left-6">
-          <ProfileBadge
-            name={user.name}
-            email={user.email}
-            avatarUrl={user.avatar.url}
+      <header className="profile-header relative">
+        <figure>
+          <img
+            className="w-full h-60 sm:object-cover sm:rounded-md"
+            src={user.banner.url}
+            alt={user.banner.alt}
           />
-        </div>
+          <figcaption className="absolute avatarSection flex flex-wrap items-center top-6 left-6">
+            <ProfileBadge
+              name={user.name}
+              email={user.email}
+              avatarUrl={user.avatar.url}
+            />
+          </figcaption>
+        </figure>
 
         <PrimaryButton
           onClick={handleButtonClick}
-          className=" px-2.5 py-2.5 bg-skin-createBg absolute top-4 left-4 border-transparent hover:border-2"
+          className="px-2.5 py-2.5 bg-skin-createBg absolute top-4 left-4 border-transparent hover:border-2"
           disabled={false}
         >
           <FaCamera className="text-skin-primary" size={20} />
@@ -91,39 +93,45 @@ function ProfileHeader() {
             <h4 className="text-lg font-bold text-skin-primary">
               Edit avatar/banner
             </h4>
-            <div className="my-7">
-              <label htmlFor="avatar">Edit avatar</label>
-              <input
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
-                type="text"
-                name="avatar"
-                id="avatar"
-                value={avatar}
-                onChange={handleAvatarChange}
-              />
-            </div>
-            <div className="mb-7">
-              <label htmlFor="banner">Edit banner</label>
-              <input
-                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
-                type="text"
-                name="banner"
-                id="banner"
-                value={banner}
-                onChange={handleBannerChange}
-              />
-            </div>
-            <PrimaryButton
-              onClick={handleUpdate}
-              className="pl-5 pr-5 flex items-center gap-3 px-2.5 py-2.5 top-4 left-4 bg-skin-infoBg hover:bg-skin-primary hover:text-white text-skin-primary"
-              disabled={false}
-              text="Update"
-            >
-              <FaCircleCheck size={24} />
-            </PrimaryButton>
+            <form>
+              <div className="my-7">
+                <label htmlFor="avatar" className="block mb-2">
+                  Edit avatar
+                </label>
+                <input
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
+                  type="text"
+                  name="avatar"
+                  id="avatar"
+                  value={avatar}
+                  onChange={handleAvatarChange}
+                />
+              </div>
+              <div className="mb-7">
+                <label htmlFor="banner" className="block mb-2">
+                  Edit banner
+                </label>
+                <input
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-skin-InputBorder"
+                  type="text"
+                  name="banner"
+                  id="banner"
+                  value={banner}
+                  onChange={handleBannerChange}
+                />
+              </div>
+              <PrimaryButton
+                onClick={handleUpdate}
+                className="pl-5 pr-5 flex items-center gap-3 px-2.5 py-2.5 top-4 left-4 bg-skin-infoBg hover:bg-skin-primary hover:text-white text-skin-primary"
+                disabled={false}
+                text="Update"
+              >
+                <FaCircleCheck size={24} />
+              </PrimaryButton>
+            </form>
           </article>
         </Modal>
-      </article>
+      </header>
     </div>
   );
 }

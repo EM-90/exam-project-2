@@ -31,7 +31,7 @@ function ProfileBadge({
   }
 
   return (
-    <section className="avatarSection flex flex-wrap items-center ">
+    <article className="avatarSection flex flex-wrap items-center ">
       {avatarUrl && (
         <img
           className="rounded-full object-cover w-28 h-28"
@@ -49,7 +49,7 @@ function ProfileBadge({
           </section>
         )}
       </section>
-    </section>
+    </article>
   );
 }
 
