@@ -110,7 +110,10 @@ function Navbar() {
               {user && (
                 <li>
                   <button
-                    onClick={logout}
+                    onClick={() => {
+                      logout();
+                      closeMenu();
+                    }}
                     className="text-white hover:font-bold text-3xl"
                   >
                     Logout
