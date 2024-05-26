@@ -1,30 +1,93 @@
-# React + TypeScript + Vite
+# Holidaze
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is part of my exam where I have attempted to learn and apply TypeScript and Tailwind CSS. Holidaze is a travel booking site where users can book venues for their stay.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+React: A JavaScript library for building user interfaces.
+TypeScript: A typed superset of JavaScript that compiles to plain JavaScript.
+Tailwind CSS: A utility-first CSS framework for rapid UI development.
+Vite: A fast build tool for modern web projects.
+React Router: For handling client-side routing.
+Axios: For making HTTP requests.
+Setup Instructions
+Follow these steps to set up the project locally:
 
-## Expanding the ESLint configuration
+## Setup instructions
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Prerequisites
 
-- Configure the top-level `parserOptions` property like this:
+Make sure you have the following installed:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
+Node.js (>= 14.x)
+npm (>= 6.x) or yarn (>= 1.22.x)
+Git
+Clone the Repository
+First, clone the repository to your local machine using git:
+
+    ```
+
+{
+git clone https://github.com/EM/holidaze.git
+cd holidaze
 }
-```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+````
+### Install Dependencies
+Install the project dependencies using npm or yarn:
+
+	```
+{
+# Using npm
+npm install
+
+# Using yarn
+yarn install
+}
+````
+
+### Running the Development Server
+
+Start the development server:
+
+    ```
+
+{
+
+# Using npm
+
+npm run dev
+
+# Using yarn
+
+yarn dev
+}
+
+````
+This will start the Vite development server and you can view the project by navigating to http://localhost:3000 in your web browser.
+
+### Building for Production
+To create a production build, run:
+
+	```
+{
+# Using npm
+npm run build
+
+# Using yarn
+yarn build
+}
+````
+
+## Learning Goals
+
+This project was an opportunity for me to:
+
+- Learn and apply TypeScript in a real-world project.
+- Utilize Tailwind CSS for styling and understand utility-first CSS principles.
+- Implement client-side routing using React Router.
+- Manage state and side effects in a React application.
+- Interact with APIs using Axios.
+- Set up and configure a modern front-end development environment using Vite.
+- Contributing
+- If you'd like to contribute to this project, please fork the repository and use a feature branch. Pull requests are warmly welcome.
