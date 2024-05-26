@@ -7,6 +7,7 @@ import VenueForm from "../../components/forms/venueForm";
 import Modal from "../../components/modal";
 import PrimaryButton from "../../components/buttons/primaryButton";
 import { profileAPI } from "../../api/profiles";
+import { bookingAPI } from "../../api/booking";
 import VenueManagerLi from "../../components/profileContent/venueManagerLi";
 import { useNavigate } from "react-router-dom";
 import useVenueForm from "../../hooks/useVenueForm";
@@ -35,6 +36,7 @@ function Profile() {
   const [updatedVenueId, setUpdatedVenueId] = useState<string | null>(null);
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
   const [venueToDelete, setVenueToDelete] = useState<string | null>(null);
+  const [bookingToDelete, setBookingToDelete] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const toggleModal = () => setShowModal((prev) => !prev);
@@ -91,10 +93,34 @@ function Profile() {
     }
   };
 
+  const handleBookingDeleteClick = (bookingId: string | undefined) => {
+    if (bookingId) {
+      setBookingToDelete(bookingId);
+      setShowConfirmModal(true);
+    }
+  };
+
+  const handleDeleteBooking = async (bookingId: string) => {
+    try {
+      await bookingAPI.deleteBooking(bookingId);
+      setUserBookings((prevBookings) =>
+        prevBookings.filter((booking) => booking.id !== bookingId)
+      );
+    } catch (error) {
+      console.error("Failed to delete booking:", error);
+    }
+  };
+
   const confirmDelete = async () => {
     if (venueToDelete) {
       await handleDelete(venueToDelete, setVenues, venues);
       setShowConfirmModal(false);
+      setVenueToDelete(null);
+    }
+    if (bookingToDelete) {
+      await handleDeleteBooking(bookingToDelete);
+      setShowConfirmModal(false);
+      setBookingToDelete(null);
     }
   };
 
@@ -190,6 +216,7 @@ function Profile() {
                 key={booking.id}
                 booking={booking}
                 onClick={() => handleClick(booking.venue.id)}
+                onDelete={() => handleBookingDeleteClick(booking.id)}
               />
             ))}
           </section>
@@ -212,7 +239,10 @@ function Profile() {
             <h2 className="text-xl font-bold mb-4 text-skin-primary">
               Confirm Delete
             </h2>
-            <p>Are you sure you want to delete this venue?</p>
+            <p>
+              Are you sure you want to delete this{" "}
+              {venueToDelete ? "venue" : "booking"}?
+            </p>
             <div className="flex gap-4 justify-start sm:justify-between mt-4">
               <PrimaryButton
                 onClick={confirmDelete}

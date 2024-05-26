@@ -1,12 +1,18 @@
+import React from "react";
 import PrimaryButton from "../../buttons/primaryButton";
-import { FaPen } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 
 interface BookingLiProps {
   booking: any;
   onClick: () => void;
+  onDelete: () => void;
 }
 
-function BookingLi({ booking, onClick }: BookingLiProps) {
+const BookingLi: React.FC<BookingLiProps> = ({
+  booking,
+  onClick,
+  onDelete,
+}) => {
   const { venue, dateFrom, dateTo } = booking;
   const { location } = venue || {};
 
@@ -54,17 +60,20 @@ function BookingLi({ booking, onClick }: BookingLiProps) {
           </div>
           <div>
             <PrimaryButton
-              className="penIcon bg-skin-editBg hover:bg-skin-primary p-4 text-white"
+              className="trashIcon p-4 text-gray-500 hover:bg-gray-200"
               disabled={false}
-              aria-label="Edit booking"
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete();
+              }}
             >
-              <FaPen size={20} />
+              <FaTrash size={20} />
             </PrimaryButton>
           </div>
         </div>
       </header>
     </article>
   );
-}
+};
 
 export default BookingLi;
