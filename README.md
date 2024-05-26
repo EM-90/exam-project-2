@@ -4,14 +4,12 @@ This project is part of my exam where I have attempted to learn and apply TypeSc
 
 ## Features
 
-React: A JavaScript library for building user interfaces.
-TypeScript: A typed superset of JavaScript that compiles to plain JavaScript.
-Tailwind CSS: A utility-first CSS framework for rapid UI development.
-Vite: A fast build tool for modern web projects.
-React Router: For handling client-side routing.
-Axios: For making HTTP requests.
-Setup Instructions
-Follow these steps to set up the project locally:
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
+- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
+- **Vite**: A fast build tool for modern web projects.
+- **React Router**: For handling client-side routing.
+- **Axios**: For making HTTP requests.
 
 ## Setup instructions
 
@@ -19,40 +17,39 @@ Follow these steps to set up the project locally:
 
 Make sure you have the following installed:
 
-Node.js (>= 14.x)
-npm (>= 6.x) or yarn (>= 1.22.x)
-Git
-Clone the Repository
+- Node.js (>= 14.x)
+- npm (>= 6.x) or yarn (>= 1.22.x)
+- Git
+
+###Clone the Repository
+
 First, clone the repository to your local machine using git:
 
-    ```
-
-{
-git clone https://github.com/EM/holidaze.git
+\`\`\`
+git clone https://github.com/your-username/holidaze.git
 cd holidaze
-}
+\`\`\`
 
-````
 ### Install Dependencies
+
 Install the project dependencies using npm or yarn:
 
-	```
-{
+\`\`\`
+
 # Using npm
+
 npm install
 
 # Using yarn
+
 yarn install
-}
-````
+\`\`\`
 
 ### Running the Development Server
 
 Start the development server:
 
-    ```
-
-{
+\`\`\`
 
 # Using npm
 
@@ -61,23 +58,24 @@ npm run dev
 # Using yarn
 
 yarn dev
-}
+\`\`\`
 
-````
 This will start the Vite development server and you can view the project by navigating to http://localhost:3000 in your web browser.
 
 ### Building for Production
+
 To create a production build, run:
 
-	```
-{
+\`\`\`
+
 # Using npm
+
 npm run build
 
 # Using yarn
+
 yarn build
-}
-````
+\`\`\`
 
 ## Learning Goals
 
