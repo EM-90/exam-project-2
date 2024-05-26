@@ -6,7 +6,7 @@ interface ValidationErrorProps {
 
 const ValidationError: React.FC<ValidationErrorProps> = ({ errorMessage }) => {
   return (
-    <article className="w-96 mb-4 p-2 font-medium text-red-600">
+    <article className="mb-4 p-2 font-medium text-red-600">
       {errorMessage}
     </article>
   );
