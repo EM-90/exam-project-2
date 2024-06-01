@@ -1,5 +1,8 @@
 # Holidaze
 
+![Holidaze-exam2-noroff-front-page](https://github.com/EM-90/exam-project-2/assets/94170154/200a6978-e502-444b-8364-28375469eb0a)
+
+
 This project is part of my exam where I have attempted to learn and apply TypeScript and Tailwind CSS. Holidaze is a travel booking site where users can book venues for their stay.
 
 ## Features
